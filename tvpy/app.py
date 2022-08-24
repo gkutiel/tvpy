@@ -49,6 +49,7 @@ def tv_html(input_json='tvpy.json', out_html='index.html'):
             print(r'<!DOCTYPE html>', file=h)
             print(r'<html lang="en">', file=h)
             print(r'<head>', file=h)
+            print(r'<meta name="viewport" content="width=device-width, initial-scale=1">', file=h)
             print(r'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">', file=h)
             print(r'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">', file=h)
             print(r'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">', file=h)
