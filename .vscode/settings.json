@@ -1,0 +1,9 @@
+{
+    "python.linting.enabled": false,
+    "cSpell.words": [
+        "imdb",
+        "mybooklive",
+        "tvpy",
+        "ujson"
+    ]
+}

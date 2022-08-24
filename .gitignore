@@ -1,1 +1,5 @@
+*.txt
+*.json
+
 dist/
+__pycache__/
