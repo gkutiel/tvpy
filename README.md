@@ -1,4 +1,4 @@
-# 📺 TvpPy 
+# 📺 TvPy 
 Generate html from folder names.
 
 ## Installation

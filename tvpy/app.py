@@ -31,7 +31,7 @@ def row(*, imdb_id, name, overview, poster_path):
         r'<div class="container" style="margin-bottom: 1em">',
         r'<div class="row">',
         r'<div class="colum" style="max-width: 10em; margin-right: 2em">',
-        f'<img src=https://image.tmdb.org/t/p/original{poster_path}></img>',
+        f'<a target="_blank" href="https://www.imdb.com/title/{imdb_id}/"><img src=https://image.tmdb.org/t/p/original{poster_path}></img></a>',
         r'</div>',
         r'<div class="colum">',
         f'<h2>{name}</h2>',
@@ -49,6 +49,9 @@ def tv_html(input_json='tvpy.json', out_html='index.html'):
             print(r'<!DOCTYPE html>', file=h)
             print(r'<html lang="en">', file=h)
             print(r'<head>', file=h)
+            print(r'<style>.rating{margin-left:.5em;}</style>', file=h)
+            print(r'<title>TvPy</title>', file=h)
+            print(r'<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">', file=h)
             print(r'<meta name="viewport" content="width=device-width, initial-scale=1">', file=h)
             print(r'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">', file=h)
             print(r'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">', file=h)
@@ -56,7 +59,7 @@ def tv_html(input_json='tvpy.json', out_html='index.html'):
             print(
                 r'<script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js";stags.parentNode.insertBefore(js,stags);})(document,"script","imdb-rating-api");</script>', file=h)
             print(r'</head>', file=h)
-            print(r'<body>', file=h)
+            print(r'<body style="padding-top: 2em;">', file=h)
             print(r'<div class="container">', file=h)
 
             for line in tqdm(f.read().splitlines()):
