@@ -2,7 +2,9 @@
 Generate html from folder names.
 
 ## Installation
-`pip install tvpy`
+```shell
+> pip install tvpy
+```
 
 ## Usage
 ```shell
