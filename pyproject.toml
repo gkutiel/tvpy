@@ -1,7 +1,10 @@
 [tool.poetry]
 name = "tvpy"
-version = "0.0.4"
+version = "0.0.5"
 description = "📺 TvPy"
+homepage = "https://github.com/gkutiel/tvpy/tree/master"
+repository = "https://github.com/gkutiel/tvpy/tree/master"
+documentation = "https://github.com/gkutiel/tvpy/tree/master"
 readme = "README.md"
 authors = ["Gilad Kutiel <gilad.kutiel@gmail.com>"]
 
