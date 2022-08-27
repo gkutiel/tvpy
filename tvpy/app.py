@@ -25,16 +25,16 @@ def tv_json(root, output_json='tvpy.json', err_txt='err.txt'):
                 print(dumps(res), file=f)
 
 
-def row(*, imdb_id, name, overview, poster_path):
+def row(*, poster_base64, name, overview, imdb_id, imdb_rating, imdb_rating_count):
     return ''.join([
         r'<div class="container" style="margin-bottom: 1em">',
         r'<div class="row">',
-        r'<div class="colum" style="max-width: 10em; margin-right: 2em">',
-        f'<a target="_blank" href="https://www.imdb.com/title/{imdb_id}/"><img src=https://image.tmdb.org/t/p/original{poster_path}></img></a>',
+        r'<div class="colum" style="margin-right: 2em">',
+        f'<a target="_blank" href="https://www.imdb.com/title/{imdb_id}/"><img style="max-width:160px;" src="data:image/jpg;base64,{poster_base64}"/></a>',
         r'</div>',
         r'<div class="colum">',
         f'<h2>{name}</h2>',
-        f'<span class="imdbRatingPlugin" data-title="{imdb_id}" data-style="p3"><a target="_blank" href="https://www.imdb.com/title/{imdb_id}/?ref_=plg_rt_1"><img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png" alt="{name}" /></a></span>',
+        f'<h4><b>{imdb_rating}</b> <small>by {imdb_rating_count:,} users</small></h4>',
         f'<p>{overview}</p>',
         r'</div>',
         r'</div>',
@@ -55,8 +55,6 @@ def tv_html(input_json='tvpy.json', out_html='index.html'):
             print(r'<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">', file=h)
             print(r'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">', file=h)
             print(r'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">', file=h)
-            print(
-                r'<script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js";stags.parentNode.insertBefore(js,stags);})(document,"script","imdb-rating-api");</script>', file=h)
             print(r'</head>', file=h)
             print(r'<body style="padding-top: 2em;">', file=h)
             print(r'<div class="container">', file=h)
@@ -67,7 +65,9 @@ def tv_html(input_json='tvpy.json', out_html='index.html'):
                     imdb_id=line['imdb_id'],
                     name=line['name'],
                     overview=line['overview'],
-                    poster_path=line['poster_path']
+                    poster_base64=line['poster_base64'],
+                    imdb_rating=line['rating'],
+                    imdb_rating_count=line['ratingCount']
                 )
                 print(r, file=h)
 
