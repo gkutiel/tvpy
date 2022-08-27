@@ -7,6 +7,7 @@ repository = "https://github.com/gkutiel/tvpy/tree/master"
 documentation = "https://github.com/gkutiel/tvpy/tree/master"
 readme = "README.md"
 authors = ["Gilad Kutiel <gilad.kutiel@gmail.com>"]
+include = ['tvpy/*']
 
 [tool.poetry.dependencies]
 python = "^3.9"
