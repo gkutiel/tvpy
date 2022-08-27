@@ -1,4 +1,3 @@
-from distutils.log import error
 from json import dumps, loads
 from tvpy.scan import scan
 from tvpy.search import search
@@ -7,7 +6,7 @@ from tqdm import tqdm
 
 def load_key():
     with open('key.txt') as f:
-        return f.read()
+        return f.read().strip()
 
 
 def tv_json(root, output_json='tvpy.json', err_txt='err.txt'):
