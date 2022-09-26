@@ -3,7 +3,7 @@ function item(i) {
     <div class='item'>
       <div class='col'>
         <a target="_blank" href="https://www.imdb.com/title/${i.imdb_id}/">
-          <img style="max-width:160px;" src="data:image/jpg;base64,${i.poster_base64}"/>
+          <img style="max-width:160px" src="data:image/jpgbase64,${i.poster_base64}"/>
         </a>      
       </div>
       <div class='col'>
@@ -28,4 +28,14 @@ function render() {
 addEventListener('DOMContentLoaded', () => {
   data.sort((a, b) => b.rating - a.rating)
   render()
+
+  const socket = new WebSocket("ws://localhost:8765")
+  socket.onopen = function (e) { }
+  socket.onclose = function (event) { }
+  socket.onerror = function (error) { }
+  socket.onmessage = function (event) {
+    console.log(`[message]  ${event.data}`)
+  }
 })
+
+

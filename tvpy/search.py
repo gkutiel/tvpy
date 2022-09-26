@@ -31,9 +31,7 @@ def imdb_rating(id):
     return {k: resource[k] for k in ('rating', 'ratingCount')}
 
 
-def poster_base64(path, width=160):
-    url = f'https://image.tmdb.org/t/p/original/{path}'
-
+def poster_base64(url, width=160):
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
     w, h = img.size
@@ -45,16 +43,18 @@ def poster_base64(path, width=160):
 
 def search(key, q):
     try:
-        res = requests.get(f'https://api.themoviedb.org/3/search/tv/?api_key={key}&query={q}')
+        url = f'https://api.themoviedb.org/3/search/tv/?api_key={key}&query={q}'
+        res = requests.get(url)
         res = res.json()
         res = res['results'][0]
         id = imdb_id(key, res['id'])
         return (
             {f: res[f] for f in FIELDS}
-            | {'imdb_id': id}
             | imdb_rating(id)
-            | {'poster_base64': poster_base64(res['poster_path'])})
-    except:
+            | {
+                'imdb_id': id,
+                'poster_path': f'https://image.tmdb.org/t/p/original/{res["poster_path"]}'})
+    except Exception as e:
         return None
 
 
