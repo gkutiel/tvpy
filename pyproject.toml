@@ -17,6 +17,8 @@ tqdm = "^4.64.0"
 Pillow = "^9.2.0"
 websockets = "^10.3"
 rich = "^12.5.1"
+parse-torrent-title = "^2.4"
+pyright = "^1.1.273"
 
 [tool.poetry.dev-dependencies]
 rope = "^1.3.0"
@@ -24,11 +26,15 @@ autopep8 = "^1.7.0"
 pytest = "^7.1.2"
 pytest-watch = "^4.2.0"
 doit = "^0.36.0"
+isort = "^5.10.1"
+autoflake = "^1.6.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
+tv-renm = "tvpy.main:tv_renm"
+tv-sync = "tvpy.main:tv_sync"
 tv-json = "tvpy.main:tv_json"
 tv-html = "tvpy.main:tv_html"
