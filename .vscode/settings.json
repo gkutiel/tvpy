@@ -1,8 +1,10 @@
 {
     "python.linting.enabled": false,
     "cSpell.words": [
+        "getbasic",
         "imdb",
         "jpgbase",
+        "libtorrent",
         "mkdir",
         "mybooklive",
         "renm",

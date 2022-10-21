@@ -2,8 +2,13 @@ from fire import Fire
 
 
 def tv_json():
-    from tvpy.tv_html import tv_json
+    from tvpy.tv_json import tv_json
     Fire(tv_json)
+
+
+def tv_info():
+    from tvpy.tv_info import tv_info
+    Fire(tv_info)
 
 
 def tv_html():
