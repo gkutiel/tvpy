@@ -6,6 +6,7 @@ from pathlib import Path
 import requests
 from PIL import Image
 from rich import print
+from rich.status import Status
 
 from tvpy.config import POSTER_WIDTH, VERSION
 from tvpy.tmdb import get, imdb_id, imdb_rating, search
@@ -34,7 +35,6 @@ def get_img(poster_path):
 def tv_json(folder):
     folder = Path(folder)
     key = load_key()
-    action, status = 'Uptodate', '[green]SUCCESS'
     tvpy_json = folder / '.tvpy.json'
 
     try:
@@ -42,25 +42,26 @@ def tv_json(folder):
             assert json.load(out)['version'] == VERSION
 
     except:
-        with open(tvpy_json, 'w') as out:
-            action = 'Downloading'
+        with Status('[orange1]Searching...') as status:
             name = folder.name.replace('.', ' ').replace('_', ' ')
             res = search(key, name)
 
             if res is None:
-                status = '[red]ERROR'
-            else:
-                tmdb_id = res['id']
-                poster = get_img(res['poster_path'])
-                poster = resize_poster(poster)
-                poster.save(folder / '.poster.jpg')
+                status.update('[red]Error')
+                status.stop()
+                return
 
-                iid = imdb_id(key, tmdb_id)
+            status.update('[green]Saving...')
+            tmdb_id = res['id']
+            poster = get_img(res['poster_path'])
+            poster = resize_poster(poster)
+            poster.save(folder / '.poster.jpg')
 
-                res = get(key, tmdb_id)
-                res |= {'imdb_id': iid}
-                res |= imdb_rating(iid)
+            iid = imdb_id(key, tmdb_id)
 
-                json.dump({'version': VERSION, 'poster_base64': img_base64(poster)} | res, out)
+            res = get(key, tmdb_id)
+            res |= {'imdb_id': iid}
+            res |= imdb_rating(iid)
 
-    print(f'{str(folder):<70}', f'{action:<13}', status)
+        with open(tvpy_json, 'w') as out:
+            json.dump({'version': VERSION, 'poster_base64': img_base64(poster)} | res, out)

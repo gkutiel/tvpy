@@ -1,12 +1,13 @@
 import json
 from pathlib import Path
-from pprint import pprint
 
 from PTN import parse
 from rich.panel import Panel
+from rich.pretty import pprint
 
 from tvpy.config import VERSION
 from tvpy.console import cls
+from tvpy.tv_json import tv_json
 from tvpy.util import files_media
 
 
@@ -25,21 +26,23 @@ def tv_info(folder):
     folder = Path(folder)
     tvpy_json = folder / '.tvpy.json'
 
-    with open(tvpy_json, 'r') as f:
-        info = json.load(f)
-
     try:
+        if not tvpy_json.exists:
+            tv_json(folder)
+        with open(tvpy_json, 'r') as f:
+            info = json.load(f)
+
         assert info['version'] == VERSION
     except:
         print(f'[red]ERROR[/red]:.tvpy.json out of date. please run [green]tv-json[/green] {folder}')
         return
 
-    genres = ', '.join([g['name'] for g in info["genres"]])
+    # genres = ', '.join([g['name'] for g in info["genres"]])
 
-    cls.rule(f'{info["name"]} {info["rating"]}')
-    cls.print(f'{"Genres:":<12} {genres}', style='warn')
+    # cls.rule(f'{info["name"]} {info["rating"]}')
+    # cls.print(f'{"Genres:":<12} {genres}', style='warn')
 
-    cls.print(Panel("Hello, [red]World!"))
+    # cls.print(Panel("Hello, [red]World!"))
 
     # for season in info['seasons']:
     #     s = season['season_number']
@@ -55,4 +58,4 @@ def tv_info(folder):
     #     print('  '.join(status))
     #     print()
 
-    # pprint(info.keys())
+    pprint(info.keys())
