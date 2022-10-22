@@ -11,6 +11,13 @@ from tvpy.tv_json import tv_json
 from tvpy.util import files_media
 
 
+def load_tvpy(folder):
+    folder = Path(folder)
+    tvpy_json = folder / '.tvpy.json'
+    with open(tvpy_json, 'r') as f:
+        return json.load(f)
+
+
 def get_existing_episodes(folder, season: int, num_episodes: int):
     existing = [False] * num_episodes
     for f in files_media(folder):
@@ -23,15 +30,8 @@ def get_existing_episodes(folder, season: int, num_episodes: int):
 
 
 def tv_info(folder):
-    folder = Path(folder)
-    tvpy_json = folder / '.tvpy.json'
-
     try:
-        if not tvpy_json.exists:
-            tv_json(folder)
-        with open(tvpy_json, 'r') as f:
-            info = json.load(f)
-
+        info = load_tvpy(folder)
         assert info['version'] == VERSION
     except:
         print(f'[red]ERROR[/red]:.tvpy.json out of date. please run [green]tv-json[/green] {folder}')

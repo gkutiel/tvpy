@@ -23,6 +23,7 @@ pyright = "^1.1.273"
 toml = "^0.10.2"
 1337x = "^1.2.3"
 libtorrent = "^2.0.7"
+beautifulsoup4 = "^4.11.1"
 
 [tool.poetry.dev-dependencies]
 rope = "^1.3.0"
@@ -41,6 +42,7 @@ build-backend = "poetry.core.masonry.api"
 tv-json = "tvpy.main:tv_json"
 tv-info = "tvpy.main:tv_info"
 tv-down = "tvpy.main:tv_down"
+tv-subt = "tvpy.main:tv_subt"
 
 tv-renm = "tvpy.main:tv_renm"
 tv-sync = "tvpy.main:tv_sync"

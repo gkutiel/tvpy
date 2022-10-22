@@ -16,6 +16,11 @@ def tv_down():
     Fire(tv_down)
 
 
+def tv_subt():
+    from tvpy.tv_subt import tv_subt
+    Fire(tv_subt)
+
+
 def tv_html():
     from tvpy.tv_html import tv_html
     Fire(tv_html)
