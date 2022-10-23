@@ -46,4 +46,4 @@ def tv_subt(folder):
 
         status.update('[green]Extracting...')
         with zipfile.ZipFile(zip_file) as z:
-            z.extractall()
+            z.extractall(folder)
