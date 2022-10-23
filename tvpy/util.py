@@ -21,7 +21,7 @@ def files_media(root):
     return files(root, patterns=['*.mkv', '*.avi', '*.mp4'])
 
 
-def files_subtitles(root):
+def files_subs(root):
     return files(root, patterns=['*.srt'])
 
 

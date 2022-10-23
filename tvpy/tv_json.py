@@ -13,6 +13,13 @@ from tvpy.tmdb import get, imdb_id, imdb_rating, search
 from tvpy.util import load_key
 
 
+def load_tvpy(folder):
+    folder = Path(folder)
+    tvpy_json = folder / '.tvpy.json'
+    with open(tvpy_json, 'r') as f:
+        return json.load(f)
+
+
 def img_base64(img):
     buffered = BytesIO()
     img.save(buffered, format="JPEG")

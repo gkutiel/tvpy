@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import List
 
 from PTN import parse
 from rich.panel import Panel
@@ -11,22 +12,27 @@ from tvpy.tv_json import tv_json
 from tvpy.util import files_media
 
 
-def load_tvpy(folder):
-    folder = Path(folder)
-    tvpy_json = folder / '.tvpy.json'
-    with open(tvpy_json, 'r') as f:
-        return json.load(f)
+def existing_episodes(folder):
+    res = [parse(f.name) for f in files_media(folder)]
+    return {(e['season'], e['episode']) for e in res}
 
 
-def get_existing_episodes(folder, season: int, num_episodes: int):
-    existing = [False] * num_episodes
-    for f in files_media(folder):
-        info = parse(f.name)
-        s, e = info['season'], info['episode']
-        if s == season:
-            existing[e - 1] = True
+def all_episodes(seasons):
+    return {
+        (s['season_number'], i)
+        for s in seasons
+        for i in range(1, s['episode_count'] + 1)}
 
-    return existing
+
+def last_episode_to_air(info):
+    res = info['last_episode_to_air']
+    return (res['season_number'], res['episode_number'])
+
+
+def on_air_episodes(info):
+    return {
+        e for e in all_episodes(info['seasons'])
+        if e <= last_episode_to_air(info)}
 
 
 def tv_info(folder):
@@ -37,6 +43,7 @@ def tv_info(folder):
         print(f'[red]ERROR[/red]:.tvpy.json out of date. please run [green]tv-json[/green] {folder}')
         return
 
+    pprint(on_air_episodes(info) - existing_episodes(folder))
     # genres = ', '.join([g['name'] for g in info["genres"]])
 
     # cls.rule(f'{info["name"]} {info["rating"]}')
