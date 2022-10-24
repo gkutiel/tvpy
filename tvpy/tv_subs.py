@@ -7,7 +7,6 @@ from PTN import parse
 from rich.pretty import pprint
 from rich.status import Status
 
-from tvpy.config import format
 from tvpy.tv_info import existing_episodes
 from tvpy.util import files_subs
 

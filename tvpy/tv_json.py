@@ -1,5 +1,7 @@
 import base64
 import json
+from datetime import datetime
+from datetime import timedelta as td
 from io import BytesIO
 from pathlib import Path
 
@@ -8,7 +10,7 @@ from PIL import Image
 from rich import print
 from rich.status import Status
 
-from tvpy.config import POSTER_WIDTH, VERSION
+from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
 from tvpy.tmdb import get, imdb_id, imdb_rating, search
 from tvpy.util import load_key
 
@@ -17,7 +19,14 @@ def load_tvpy(folder):
     folder = Path(folder)
     tvpy_json = folder / '.tvpy.json'
     with open(tvpy_json, 'r') as f:
-        return json.load(f)
+        tvpy = json.load(f)
+
+    assert tvpy['version'] == VERSION
+
+    delta = datetime.now() - datetime.strptime(tvpy['uptodate'], DATE_FORMAT)
+    assert delta.days <= CACHE_DAYS
+
+    return tvpy
 
 
 def img_base64(img):
@@ -45,9 +54,7 @@ def tv_json(folder):
     tvpy_json = folder / '.tvpy.json'
 
     try:
-        with open(tvpy_json, 'r') as out:
-            assert json.load(out)['version'] == VERSION
-
+        load_tvpy(folder)
     except:
         with Status('[orange1]Searching...') as status:
             name = folder.name.replace('.', ' ').replace('_', ' ')
@@ -67,8 +74,11 @@ def tv_json(folder):
             iid = imdb_id(key, tmdb_id)
 
             res = get(key, tmdb_id)
-            res |= {'imdb_id': iid}
             res |= imdb_rating(iid)
 
         with open(tvpy_json, 'w') as out:
-            json.dump({'version': VERSION, 'poster_base64': img_base64(poster)} | res, out)
+            json.dump({
+                'version': VERSION,
+                'uptodate': datetime.now().strftime(DATE_FORMAT),
+                'imdb_id': iid,
+                'poster_base64': img_base64(poster)} | res, out)
