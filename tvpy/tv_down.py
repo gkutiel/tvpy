@@ -57,5 +57,5 @@ def tv_down(folder):
     link = item['link']
     info = torrents.info(link)
     magnet_link = info['magnetLink']
-
-    down(magnet_link, folder)
+    print(magnet_link)
+    # down(magnet_link, folder)

@@ -8,6 +8,7 @@ from rich.pretty import pprint
 from rich.status import Status
 
 from tvpy.tv_info import existing_episodes
+from tvpy.tv_json import load_tvpy
 from tvpy.util import files_subs
 
 
@@ -40,19 +41,19 @@ def existing_subs(folder):
 
 def tv_subs(folder):
     missing_subs = existing_episodes(folder) - existing_subs(folder)
-    pprint(missing_subs)
-    # with Status('[red]Searching...') as status:
-    #     info = load_tvpy(folder)
-    #     imdb_id = info['imdb_id']
-    #     subs = get(imdb_id, 1, 7)
-    #     sub = select_sub(subs)
-    #     sub_version = sub['version']
-    #     sub_id = sub['id']
+    for s, e in missing_subs:
+        with Status(f'[red]Searching S{s:02}E{e:02}') as status:
+            info = load_tvpy(folder)
+            imdb_id = info['imdb_id']
+            subs = get(imdb_id, s, e)
+            sub = select_sub(subs)
+            sub_version = sub['version']
+            sub_id = sub['id']
 
-    #     status.update('[orange1]Downloading...')
-    #     zip_file = Path(folder) / f'{sub_version}.zip'
-    #     down_sub(sub_id, zip_file)
+            status.update('[orange1]Downloading...')
+            zip_file = Path(folder) / f'{sub_version}.zip'
+            down_sub(sub_id, zip_file)
 
-    #     status.update('[green]Extracting...')
-    #     with zipfile.ZipFile(zip_file) as z:
-    #         z.extractall(folder)
+            status.update('[green]Extracting...')
+            with zipfile.ZipFile(zip_file) as z:
+                z.extractall(folder)
