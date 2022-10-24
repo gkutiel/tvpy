@@ -1,13 +1,11 @@
-import re
 import zipfile
 from pathlib import Path
 
 import requests
 from PTN import parse
-from rich.pretty import pprint
 from rich.status import Status
 
-from tvpy.tv_info import existing_episodes
+from tvpy.tv_down import existing_episodes
 from tvpy.tv_json import load_tvpy
 from tvpy.util import files_subs
 
@@ -20,9 +18,9 @@ def get(imdb_id, season, episode):
     return subs
 
 
-def select_sub(subs):
+def select_sub(subs, encoder='NTB'):
     for sub in subs:
-        if sub['release_group'] == format.encoder:
+        if sub['release_group'] == encoder:
             return sub
 
     return subs[0]

@@ -1,13 +1,11 @@
 import base64
 import json
 from datetime import datetime
-from datetime import timedelta as td
 from io import BytesIO
 from pathlib import Path
 
 import requests
 from PIL import Image
-from rich import print
 from rich.status import Status
 
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION

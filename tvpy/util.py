@@ -1,6 +1,7 @@
 from itertools import chain
 from pathlib import Path
-from urllib.parse import urlparse, urlunparse
+
+
 
 
 def load_key():
@@ -23,12 +24,3 @@ def files_media(root):
 
 def files_subs(root):
     return files(root, patterns=['*.srt'])
-
-
-def url_folder_name(file):
-    url = urlparse(file)
-    path = Path(url.path)
-    folder = urlunparse(url._replace(path=str(path.parent)))
-    name = str(path.name)
-    assert f'{folder}/{name}' == file, f'{folder}/{name} != {file}'
-    return folder, name
