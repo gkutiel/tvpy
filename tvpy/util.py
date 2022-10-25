@@ -11,6 +11,10 @@ def folders(root):
     return [x for x in Path(root).iterdir() if x.is_dir()]
 
 
+def tvpys(folder):
+    return Path(folder).rglob('.tvpy.json')
+
+
 def files(folder, patterns=['*.mkv', '*.avi', '*.mp4', '*.srt']):
     return chain(*[Path(folder).glob(e) for e in patterns])
 

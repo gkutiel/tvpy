@@ -1,10 +1,8 @@
 from pathlib import Path
 from time import sleep
-from urllib.parse import parse_qs, urlparse
 
 import libtorrent as lt
 from PTN import parse
-from rich.pretty import pprint
 from rich.progress import (BarColumn, Progress, TaskProgressColumn, TextColumn,
                            TimeRemainingColumn)
 
