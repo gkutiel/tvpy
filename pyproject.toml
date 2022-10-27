@@ -40,8 +40,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 tv-json = "tvpy.main:tv_json"
-tv-info = "tvpy.main:tv_info"
 tv-down = "tvpy.main:tv_down"
 tv-subs = "tvpy.main:tv_subs"
 tv-renm = "tvpy.main:tv_renm"
+
+tv-info = "tvpy.main:tv_info"
 tv-html = "tvpy.main:tv_html"
+
+tvpy = "tvpy.main:tvpy"

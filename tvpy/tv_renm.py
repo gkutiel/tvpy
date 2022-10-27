@@ -3,7 +3,6 @@ import re
 from pathlib import Path
 
 import PTN
-from tqdm import tqdm
 
 from tvpy.tv_json import load_tvpy
 from tvpy.util import files
