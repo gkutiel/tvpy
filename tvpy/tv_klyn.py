@@ -41,10 +41,8 @@ def tv_klyn(folder):
     folder = Path(folder)
     for f in folder.iterdir():
         if can_remove(f):
-            cls.print('Removing', f.name)
+            cls.print('[warn]Removing[/warn]', f.name)
             if f.is_dir():
                 shutil.rmtree(f)
             else:
                 f.unlink()
-        else:
-            cls.print(f'can not remove {parse(f.name)}')
