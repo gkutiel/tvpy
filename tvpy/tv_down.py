@@ -55,28 +55,31 @@ def down(magnets, down_folder):
 
 
 def tv_down(folder):
-    tvpy = load_tvpy(folder)
+    try:
+        tvpy = load_tvpy(folder)
 
-    magnets = []
-    for s, e in missing_episodes(folder, tvpy):
-        name = file_name(tvpy, s, e)
-        magnet = Path(folder) / f'{name}.magnet'
-        if magnet.exists():
-            with open(magnet, 'r') as f:
-                magnet_link = f.read()
-        else:
-            query = q(folder, s, e)
-            cls.status(f'[info]Searching for {query}')
-            res = torrents.search(query)
-            items = res['items']
-            assert items, f'No items for {query}'
-            link = items[0]['link']
-            info = torrents.info(link)
+        magnets = []
+        for s, e in missing_episodes(folder, tvpy):
+            name = file_name(tvpy, s, e)
+            magnet = Path(folder) / f'{name}.magnet'
+            if magnet.exists():
+                with open(magnet, 'r') as f:
+                    magnet_link = f.read()
+            else:
+                query = q(folder, s, e)
+                cls.status(f'[info]Searching for {query}')
+                res = torrents.search(query)
+                items = res['items']
+                assert items, f'No items for {query}'
+                link = items[0]['link']
+                info = torrents.info(link)
 
-            magnet_link = info['magnetLink']
-            with open(magnet, 'w') as f:
-                f.write(magnet_link)
+                magnet_link = info['magnetLink']
+                with open(magnet, 'w') as f:
+                    f.write(magnet_link)
 
-        magnets.append((name, magnet_link))
+            magnets.append((name, magnet_link))
 
-    down(magnets, folder)
+        down(magnets, folder)
+    except KeyboardInterrupt:
+        cls.print('[warn]Stopping')

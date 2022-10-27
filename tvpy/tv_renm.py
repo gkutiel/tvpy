@@ -4,6 +4,7 @@ from pathlib import Path
 
 import PTN
 
+from tvpy.console import cls
 from tvpy.tv_json import load_tvpy
 from tvpy.util import files_r
 
@@ -24,5 +25,6 @@ def tv_renm(folder):
             info = PTN.parse(file.name)
             name = f'{file_name(tvpy, info["season"], info["episode"])}{file.suffix.lower()}'
             file.rename(folder / name)
+            cls.print(f'[info]Renaming {file.name} -> {name}')
         except:
             pass

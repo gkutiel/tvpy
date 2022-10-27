@@ -5,9 +5,8 @@ import requests
 from PTN import parse
 from rich.status import Status
 
-from tvpy.tv_down import existing_episodes
 from tvpy.tv_json import load_tvpy
-from tvpy.util import files_subs
+from tvpy.util import existing_episodes, files_subs
 
 
 def list_available_subs(imdb_id, season, episode):
@@ -40,7 +39,7 @@ def existing_subs(folder):
 def tv_subs(folder):
     missing_subs = existing_episodes(folder) - existing_subs(folder)
     for s, e in missing_subs:
-        with Status(f'[red]Searching S{s:02}E{e:02}') as status:
+        with Status(f'[info]Searching for subtitles S{s:02}E{e:02}') as status:
             info = load_tvpy(folder)
             imdb_id = info['imdb_id']
             subs = list_available_subs(imdb_id, s, e)
@@ -48,10 +47,10 @@ def tv_subs(folder):
             sub_version = sub['version']
             sub_id = sub['id']
 
-            status.update('[orange1]Downloading...')
+            status.update('[info]Downloading subtitles')
             zip_file = Path(folder) / f'{sub_version}.zip'
             down_sub(sub_id, zip_file)
 
-            status.update('[green]Extracting...')
+            status.update('[info]Extracting subtitles')
             with zipfile.ZipFile(zip_file) as z:
                 z.extractall(folder)
