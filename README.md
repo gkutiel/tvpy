@@ -1,5 +1,7 @@
 # 📺 TvPy 
-Generate html from folder names.
+Best command line to manage tv shows.
+
+[![asciicast](https://asciinema.org/a/c9vcmIziWPfZUXPDlVToBteyT.svg)](https://asciinema.org/a/c9vcmIziWPfZUXPDlVToBteyT)
 
 ## Installation
 ```shell
@@ -11,6 +13,6 @@ You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) 
 
 ## Usage
 ```shell
-> mkdir Carnival.Row Resident.Alien Liar Under.the.Banner.of.Heaven
-> tv-json . && tv-html
+> mkdir Carnival.Row 
+> tvpy Carnival.Row 
 ```

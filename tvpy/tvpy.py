@@ -44,3 +44,4 @@ def tvpy(folder):
     tv_renm(folder)
 
     cls.print(logo)
+    cls.save_svg('demo.svg')

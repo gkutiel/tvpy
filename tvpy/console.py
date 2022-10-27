@@ -6,8 +6,11 @@ info = Style.parse('dim cyan')
 warn = Style.parse('orange1')
 err = Style.parse('bold red')
 success = Style.parse('green')
-cls = Console(theme=Theme({
-    'info': info,
-    'warn': warn,
-    'err': err,
-    'success': success}))
+
+cls = Console(
+    record=True,
+    theme=Theme({
+        'info': info,
+        'warn': warn,
+        'err': err,
+        'success': success}))
