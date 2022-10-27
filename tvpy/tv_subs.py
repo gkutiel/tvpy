@@ -10,7 +10,7 @@ from tvpy.tv_json import load_tvpy
 from tvpy.util import files_subs
 
 
-def get(imdb_id, season, episode):
+def list_available_subs(imdb_id, season, episode):
     url = f'https://wizdom.xyz/api/releases/{imdb_id}'
     res = requests.get(url).json()
     subs = res['subs']
@@ -43,7 +43,7 @@ def tv_subs(folder):
         with Status(f'[red]Searching S{s:02}E{e:02}') as status:
             info = load_tvpy(folder)
             imdb_id = info['imdb_id']
-            subs = get(imdb_id, s, e)
+            subs = list_available_subs(imdb_id, s, e)
             sub = select_sub(subs)
             sub_version = sub['version']
             sub_id = sub['id']

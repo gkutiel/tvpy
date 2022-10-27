@@ -9,22 +9,9 @@ from PIL import Image
 from rich.status import Status
 
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
+from tvpy.console import cls
 from tvpy.tmdb import get, imdb_id, imdb_rating, search
 from tvpy.util import load_key
-
-
-def load_tvpy(folder):
-    folder = Path(folder)
-    tvpy_json = folder / '.tvpy.json'
-    with open(tvpy_json, 'r') as f:
-        tvpy = json.load(f)
-
-    assert tvpy['version'] == VERSION
-
-    delta = datetime.now() - datetime.strptime(tvpy['uptodate'], DATE_FORMAT)
-    assert delta.days <= CACHE_DAYS
-
-    return tvpy
 
 
 def img_base64(img):
@@ -46,25 +33,47 @@ def get_img(poster_path):
     return img
 
 
+def load_tvpy(folder, tries=1):
+    try:
+        folder = Path(folder)
+        tvpy_json = folder / '.tvpy.json'
+        with open(tvpy_json, 'r') as f:
+            tvpy = json.load(f)
+
+        assert tvpy['version'] == VERSION
+
+        delta = datetime.now() - datetime.strptime(tvpy['uptodate'], DATE_FORMAT)
+        assert delta.days <= CACHE_DAYS
+
+        return tvpy
+    except:
+        if tries <= 0:
+            raise FileNotFoundError(f'Can not load or download {tv_json}')
+
+        tv_json(folder)
+        return load_tvpy(folder, tries - 1)
+
+
 def tv_json(folder, force=False):
     folder = Path(folder)
     key = load_key()
     tvpy_json = folder / '.tvpy.json'
 
-    try:
-        assert not force
-        load_tvpy(folder)
-    except:
-        with Status('[orange1]Searching...') as status:
+    with Status('[info]Loading...', console=cls) as status:
+        try:
+            assert not force
+            load_tvpy(folder)
+        except:
+            status.update('[info]Searching...')
             name = folder.name.replace('.', ' ').replace('_', ' ')
             res = search(key, name)
 
             if res is None:
-                status.update('[red]Error')
                 status.stop()
+                cls.print(f'[err]Error:[/err] Could not find info for {name}')
                 return
 
-            status.update('[green]Saving...')
+            status.update('[info]Saving...')
             tmdb_id = res['id']
             poster = get_img(res['poster_path'])
             poster = resize_poster(poster)
@@ -75,9 +84,11 @@ def tv_json(folder, force=False):
             res = get(key, tmdb_id)
             res |= imdb_rating(iid)
 
-        with open(tvpy_json, 'w') as out:
-            json.dump({
-                'version': VERSION,
-                'uptodate': datetime.now().strftime(DATE_FORMAT),
-                'imdb_id': iid,
-                'poster_base64': img_base64(poster)} | res, out)
+            with open(tvpy_json, 'w') as out:
+                json.dump({
+                    'version': VERSION,
+                    'uptodate': datetime.now().strftime(DATE_FORMAT),
+                    'imdb_id': iid,
+                    'poster_base64': img_base64(poster)} | res, out)
+
+    cls.print('[green]Done')

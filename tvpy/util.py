@@ -1,6 +1,9 @@
 from itertools import chain
 from pathlib import Path
 
+from PTN import parse
+
+
 
 def load_key():
     with open('key.txt') as f:
@@ -37,3 +40,32 @@ def files_media_r(root):
 
 def files_subs_r(root):
     return files_r(root, patterns=['*.srt'])
+
+
+def existing_episodes(folder):
+    res = [parse(f.name) for f in files_media(folder)]
+    return {(e['season'], e['episode']) for e in res}
+
+
+def all_episodes(info):
+    episodes = {
+        (s['season_number'], i)
+        for s in info['seasons']
+        for i in range(1, s['episode_count'] + 1)}
+
+    return sorted({(s, e) for s, e in episodes if s > 0})
+
+
+def last_episode_to_air(info):
+    res = info['last_episode_to_air']
+    return (res['season_number'], res['episode_number'])
+
+
+def on_air_episodes(info):
+    return {
+        e for e in all_episodes(info)
+        if e <= last_episode_to_air(info)}
+
+
+def missing_episodes(folder, tvpy):
+    return sorted(on_air_episodes(tvpy) - existing_episodes(folder))

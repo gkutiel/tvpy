@@ -1,6 +1,13 @@
 from rich.console import Console
+from rich.style import Style
 from rich.theme import Theme
 
+info = Style.parse('dim cyan')
+warn = Style.parse('orange1')
+err = Style.parse('bold red')
+success = Style.parse('green')
 cls = Console(theme=Theme({
-    'warn': 'bold orange1',
-    'err': 'bold red'}))
+    'info': info,
+    'warn': warn,
+    'err': err,
+    'success': success}))
