@@ -20,7 +20,7 @@ def file_name(tvpy, s, e):
 def tv_renm(folder):
     folder = Path(folder)
     tvpy = load_tvpy(folder)
-    for file in tqdm(files(folder)):
+    for file in files(folder):
         try:
             info = PTN.parse(file.name)
             name = f'{file_name(tvpy, info["season"], info["episode"])}{file.suffix.lower()}'
