@@ -25,6 +25,8 @@ def tvpy(folder):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
 
+    cls.print(logo)
+
     sep('Generating .tvpy.json')
     tv_json(folder)
 
@@ -43,5 +45,4 @@ def tvpy(folder):
     sep('Renaming files')
     tv_renm(folder)
 
-    cls.print(logo)
     cls.save_svg('demo.svg')

@@ -59,6 +59,7 @@ def tv_subs(folder):
                 with zipfile.ZipFile(zip_file) as z:
                     z.extractall(folder)
 
+                status.stop()
                 cls.print(f':clapper: [success]{name}')
             except:
                 status.stop()

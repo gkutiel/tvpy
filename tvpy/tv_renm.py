@@ -26,7 +26,7 @@ def tv_renm(folder):
             name = f'{file_name(tvpy, info["season"], info["episode"])}{file.suffix.lower()}'
             if name != file.name:
                 file.rename(folder / name)
-                cls.print(f':+1: [success]{name}')
+                cls.print(f':keyboard: [success]{name}')
         except:
             pass
 

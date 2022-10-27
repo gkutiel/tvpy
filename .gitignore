@@ -1,6 +1,7 @@
 *.txt
 *.json
 *.yml
+*.svg
 
 dist/
 __pycache__/
