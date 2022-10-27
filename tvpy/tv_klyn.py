@@ -5,6 +5,7 @@ from genericpath import isdir
 from PTN import parse
 
 from tvpy.console import cls
+from tvpy.util import done
 
 keep_types = {'MKV', 'MP4', 'AVI', 'SRT'}
 
@@ -41,8 +42,10 @@ def tv_klyn(folder):
     folder = Path(folder)
     for f in folder.iterdir():
         if can_remove(f):
-            cls.print('[warn]Removing[/warn]', f.name)
+            cls.print(f':wastebasket: [warn]{f.name}')
             if f.is_dir():
                 shutil.rmtree(f)
             else:
                 f.unlink()
+
+    done()

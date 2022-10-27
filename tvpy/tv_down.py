@@ -9,7 +9,7 @@ from tvpy.console import cls
 from tvpy.torrent import torrents
 from tvpy.tv_json import load_tvpy, tv_json
 from tvpy.tv_renm import file_name
-from tvpy.util import missing_episodes
+from tvpy.util import done, missing_episodes
 
 
 def q(folder, season: int, episode: int):
@@ -80,6 +80,10 @@ def tv_down(folder):
 
             magnets.append((name, magnet_link))
 
-        down(magnets, folder)
+        if magnets:
+            down(magnets, folder)
+
     except KeyboardInterrupt:
-        cls.print('[warn]Stopping')
+        pass
+
+    done()

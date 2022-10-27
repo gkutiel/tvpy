@@ -3,6 +3,7 @@ from pathlib import Path
 
 from PTN import parse
 
+from tvpy.console import cls
 
 
 def load_key():
@@ -69,3 +70,7 @@ def on_air_episodes(info):
 
 def missing_episodes(folder, tvpy):
     return sorted(on_air_episodes(tvpy) - existing_episodes(folder))
+
+
+def done():
+    cls.print(f'[green]Done :+1:')

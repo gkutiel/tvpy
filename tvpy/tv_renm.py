@@ -6,7 +6,7 @@ import PTN
 
 from tvpy.console import cls
 from tvpy.tv_json import load_tvpy
-from tvpy.util import files_r
+from tvpy.util import done, files_r
 
 
 def file_name(tvpy, s, e):
@@ -24,7 +24,10 @@ def tv_renm(folder):
         try:
             info = PTN.parse(file.name)
             name = f'{file_name(tvpy, info["season"], info["episode"])}{file.suffix.lower()}'
-            file.rename(folder / name)
-            cls.print(f'[info]Renaming {file.name} -> {name}')
+            if name != file.name:
+                file.rename(folder / name)
+                cls.print(f':+1: [success]{name}')
         except:
             pass
+
+    done()

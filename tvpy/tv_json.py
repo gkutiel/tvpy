@@ -11,7 +11,7 @@ from rich.status import Status
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
 from tvpy.console import cls
 from tvpy.tmdb import get, imdb_id, imdb_rating, search
-from tvpy.util import load_key
+from tvpy.util import done, load_key
 
 
 def img_base64(img):
@@ -91,4 +91,4 @@ def tv_json(folder, force=False):
                     'imdb_id': iid,
                     'poster_base64': img_base64(poster)} | res, out)
 
-    cls.print('[green]Done')
+    done()

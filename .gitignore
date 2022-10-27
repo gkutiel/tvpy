@@ -1,6 +1,6 @@
 *.txt
 *.json
-*.yaml
+*.yml
 
 dist/
 __pycache__/

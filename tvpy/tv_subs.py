@@ -7,7 +7,7 @@ from rich.status import Status
 
 from tvpy.console import cls
 from tvpy.tv_json import load_tvpy
-from tvpy.util import existing_episodes, files_subs
+from tvpy.util import done, existing_episodes, files_subs
 
 
 def list_available_subs(imdb_id, season, episode):
@@ -43,20 +43,25 @@ def tv_subs(folder):
     info = load_tvpy(folder)
     imdb_id = info['imdb_id']
     for s, e in missing_subs:
-        with Status(f'[info]Searching for subtitles S{s:02}E{e:02}') as status:
+        name = f'{info["name"]} S{s:02}E{e:02}'
+        with Status(f'[info]Searching...') as status:
             try:
                 subs = list_available_subs(imdb_id, s, e)
                 sub = select_sub(subs)
                 sub_version = sub['version']
                 sub_id = sub['id']
 
-                status.update('[info]Downloading subtitles')
+                status.update('[info]Downloading...')
                 zip_file = Path(folder) / f'{sub_version}.zip'
                 down_sub(sub_id, zip_file)
 
-                status.update('[info]Extracting subtitles')
+                status.update('[info]Extracting...')
                 with zipfile.ZipFile(zip_file) as z:
                     z.extractall(folder)
+
+                cls.print(f':clapper: [success]{name}')
             except:
                 status.stop()
-                cls.print(f'[err]Error:[/err] Could not find subtitles for {info["name"]} S{s:02}E{e:02}')
+                cls.print(f'[err]Error:[/err] Could not find subtitles for {name}')
+
+    done()
