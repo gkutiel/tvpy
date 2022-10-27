@@ -46,7 +46,7 @@ def down(magnets, down_folder):
                 progress.update(
                     task,
                     completed=status.progress,
-                    size=f'{status.total_download / 1048576:.1f}',
+                    size=f'{status.total_done / 1048576:.1f}',
                     down=f'{status.download_rate / 1000:.1f}',
                     up=f'{status.upload_rate / 1000:.1f}',
                     peers=status.num_peers)
