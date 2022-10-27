@@ -46,12 +46,13 @@ def get_img(poster_path):
     return img
 
 
-def tv_json(folder):
+def tv_json(folder, force=False):
     folder = Path(folder)
     key = load_key()
     tvpy_json = folder / '.tvpy.json'
 
     try:
+        assert not force
         load_tvpy(folder)
     except:
         with Status('[orange1]Searching...') as status:

@@ -6,6 +6,7 @@ from PTN import parse
 from rich.progress import (BarColumn, Progress, TaskProgressColumn, TextColumn,
                            TimeRemainingColumn)
 
+from tvpy.console import cls
 from tvpy.torrent import torrents
 from tvpy.tv_json import load_tvpy
 from tvpy.tv_renm import file_name
@@ -62,10 +63,12 @@ def existing_episodes(folder):
 
 
 def all_episodes(seasons):
-    return {
+    episodes = {
         (s['season_number'], i)
         for s in seasons
         for i in range(1, s['episode_count'] + 1)}
+
+    return {(s, e) for s, e in episodes if s > 0}
 
 
 def last_episode_to_air(info):
@@ -92,9 +95,12 @@ def tv_down(folder):
             with open(magnet, 'r') as f:
                 magnet_link = f.read()
         else:
-            res = torrents.search(q(folder, s, e))
-            item = res['items'][0]
-            link = item['link']
+            query = q(folder, s, e)
+            cls.status(f'[orange1]Searching for {query}')
+            res = torrents.search(query)
+            items = res['items']
+            assert items, f'No items for {query}'
+            link = items[0]['link']
             info = torrents.info(link)
 
             magnet_link = info['magnetLink']
