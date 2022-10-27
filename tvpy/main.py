@@ -21,6 +21,11 @@ def tv_renm():
     Fire(tv_renm)
 
 
+def tv_klyn():
+    from tvpy.tv_klyn import tv_klyn
+    Fire(tv_klyn)
+
+
 def tv_info():
     from tvpy.tv_info import tv_info
     Fire(tv_info)
