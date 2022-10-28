@@ -1,11 +1,14 @@
 from pathlib import Path
 from time import sleep
+from typing import List, Tuple
 
-import libtorrent as lt
-from rich.progress import (BarColumn, Progress, TaskProgressColumn, TextColumn,
-                           TimeRemainingColumn)
+import rich.status
+from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
+                           TextColumn, TimeRemainingColumn)
 
 from tvpy.console import cls
+# import libtorrent as lt
+from tvpy.lt import Handler, Status, lt
 from tvpy.torrent import torrents
 from tvpy.tv_json import load_tvpy, tv_json
 from tvpy.tv_renm import file_name
@@ -31,7 +34,7 @@ def down(magnets, down_folder):
             TextColumn('[blue]Up: {task.fields[up]}kB/s'),
             TextColumn('[orange1]Peers: {task.fields[peers]}')) as progress:
 
-        tasks = []
+        tasks: List[Tuple[Handler, TaskID]] = []
         for name, link in magnets:
             params = lt.parse_magnet_uri(link)
             params.save_path = down_folder
@@ -59,26 +62,27 @@ def tv_down(folder):
         tvpy = load_tvpy(folder)
 
         magnets = []
-        for s, e in missing_episodes(folder, tvpy):
-            name = file_name(tvpy, s, e)
-            magnet = Path(folder) / f'{name}.magnet'
-            if magnet.exists():
-                with open(magnet, 'r') as f:
-                    magnet_link = f.read()
-            else:
-                query = q(folder, s, e)
-                cls.status(f'[info]Searching for {query}')
-                res = torrents.search(query)
-                items = res['items']
-                assert items, f'No items for {query}'
-                link = items[0]['link']
-                info = torrents.info(link)
+        with rich.status.Status('', console=cls) as status:
+            for s, e in missing_episodes(folder, tvpy):
+                name = file_name(tvpy, s, e)
+                magnet = Path(folder) / f'{name}.magnet'
+                if magnet.exists():
+                    with open(magnet, 'r') as f:
+                        magnet_link = f.read()
+                else:
+                    query = q(folder, s, e)
+                    status.update(f'[info]Searching for {query}')
+                    res = torrents.search(query)
+                    items = res['items']
+                    assert items, f'No items for {query}'
+                    link = items[0]['link']
+                    info = torrents.info(link)
 
-                magnet_link = info['magnetLink']
-                with open(magnet, 'w') as f:
-                    f.write(magnet_link)
+                    magnet_link = info['magnetLink']
+                    with open(magnet, 'w') as f:
+                        f.write(magnet_link)
 
-            magnets.append((name, magnet_link))
+                magnets.append((name, magnet_link))
 
         if magnets:
             down(magnets, folder)

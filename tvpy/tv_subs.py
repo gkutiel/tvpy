@@ -44,7 +44,7 @@ def tv_subs(folder):
     imdb_id = info['imdb_id']
     for s, e in missing_subs:
         name = f'{info["name"]} S{s:02}E{e:02}'
-        with Status(f'[info]Searching...') as status:
+        with Status(f'[info]Searching...', console=cls) as status:
             try:
                 subs = list_available_subs(imdb_id, s, e)
                 sub = select_sub(subs)

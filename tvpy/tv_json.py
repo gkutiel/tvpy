@@ -36,6 +36,7 @@ def get_img(poster_path):
 def load_tvpy(folder, tries=1):
     try:
         folder = Path(folder)
+
         tvpy_json = folder / '.tvpy.json'
         with open(tvpy_json, 'r') as f:
             tvpy = json.load(f)
@@ -56,15 +57,17 @@ def load_tvpy(folder, tries=1):
 
 def tv_json(folder, force=False):
     folder = Path(folder)
+    folder.mkdir(exist_ok=True)
+
     key = load_key()
     tvpy_json = folder / '.tvpy.json'
 
-    with Status('[info]Loading...', console=cls) as status:
+    with Status('', console=cls) as status:
         try:
             assert not force
             load_tvpy(folder)
         except:
-            status.update('[info]Searching...')
+            status.update('[info]Searching TMDB...')
             name = folder.name.replace('.', ' ').replace('_', ' ')
             res = search(key, name)
 
@@ -73,7 +76,6 @@ def tv_json(folder, force=False):
                 cls.print(f'[err]Error:[/err] Could not find info for {name}')
                 return
 
-            status.update('[info]Saving...')
             tmdb_id = res['id']
             poster = get_img(res['poster_path'])
             poster = resize_poster(poster)
