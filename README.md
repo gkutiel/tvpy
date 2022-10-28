@@ -43,7 +43,7 @@ Download (Hebrew) subtitles for a tv show:
 > tv-subs Carnival.Row
 ```
 
-Rename files to match the pattern `<title>.S<season>E<episode>.mkv`
+Rename files to match the pattern `<title>.S<season>E<episode>.<ext>`
 ```shell
 > mkdir Carnival.Row 
 > tv-renm Carnival.Row
