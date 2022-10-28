@@ -17,3 +17,45 @@ You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) 
 > tvpy Carnival.Row 
 ```
 
+## Other commands
+
+Download information from TMDB:
+```shell
+> mkdir Carnival.Row 
+> tv-json Carnival.Row
+```
+
+Display information about a tv show:
+```shell
+> mkdir Carnival.Row 
+> tv-info Carnival.Row
+```
+
+Download a tv show:
+```shell
+> mkdir Carnival.Row 
+> tv-down Carnival.Row
+```
+
+Download (Hebrew) subtitles for a tv show:
+```shell
+> mkdir Carnival.Row 
+> tv-subs Carnival.Row
+```
+
+Rename files to match the pattern `<title>.S<season>E<episode>.mkv`
+```shell
+> mkdir Carnival.Row 
+> tv-renm Carnival.Row
+```
+
+| :exclamation:  Danger   |
+|-------------------------|
+
+To remove unused files
+```shell
+> mkdir Carnival.Row 
+> tv-klyn Carnival.Row
+```
+
+
