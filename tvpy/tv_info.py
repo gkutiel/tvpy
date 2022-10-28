@@ -1,5 +1,8 @@
 
 
+from pathlib import Path
+
+import climage
 from rich.panel import Panel
 from rich.table import Table
 
@@ -11,6 +14,7 @@ from tvpy.util import all_episodes, existing_episodes, last_episode_to_air
 def tv_info(folder):
     try:
         info = load_tvpy(folder)
+        poster = Path(folder) / '.poster.jpg'
 
         panel = Panel(
             title=info["name"],
@@ -20,6 +24,11 @@ def tv_info(folder):
 
         cls.print()
         cls.print(panel)
+
+        print(climage.convert(
+            poster,
+            is_unicode=True,
+            width=40))
 
         episodes = all_episodes(info)
         ss, es = zip(*episodes)

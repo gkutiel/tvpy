@@ -1,6 +1,7 @@
 {
     "python.linting.enabled": false,
     "cSpell.words": [
+        "climage",
         "getbasic",
         "imdb",
         "jpgbase",
