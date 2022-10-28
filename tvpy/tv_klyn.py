@@ -1,7 +1,6 @@
 import shutil
 from pathlib import Path
 
-from genericpath import isdir
 from PTN import parse
 
 from tvpy.console import cls

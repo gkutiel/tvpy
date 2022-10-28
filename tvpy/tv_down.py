@@ -2,15 +2,15 @@ from pathlib import Path
 from time import sleep
 from typing import List, Tuple
 
+import libtorrent as lt
 import rich.status
 from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
                            TextColumn, TimeRemainingColumn)
 
 from tvpy.console import cls
-# import libtorrent as lt
-from tvpy.lt import Handler, Status, lt
+from tvpy.lt import Handler
 from tvpy.torrent import torrents
-from tvpy.tv_json import load_tvpy, tv_json
+from tvpy.tv_json import load_tvpy
 from tvpy.tv_renm import file_name
 from tvpy.util import done, missing_episodes
 

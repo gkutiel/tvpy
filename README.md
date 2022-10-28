@@ -1,15 +1,15 @@
 # 📺 TvPy 
-Best command line to manage tv shows.
+Best command line tv manager.
 
-[![asciicast](https://asciinema.org/a/c9vcmIziWPfZUXPDlVToBteyT.svg)](https://asciinema.org/a/c9vcmIziWPfZUXPDlVToBteyT)
+[![asciicast](https://asciinema.org/a/hQeLoj8lYcGtJvErlTWifdmfo.svg)](https://asciinema.org/a/hQeLoj8lYcGtJvErlTWifdmfo)
 
 ## Installation
 ```shell
 > pip install tvpy
 ```
 
-## Get an API Key
-You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) and save it as `key.txt` in your working directory.
+<!-- ## Get an API Key
+You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) and save it as `key.txt` in your working directory. -->
 
 ## Usage
 ```shell
@@ -17,5 +17,3 @@ You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) 
 > tvpy Carnival.Row 
 ```
 
-## Demo
-<script id="asciicast-455413" src="https://asciinema.org/a/455413.js"></script>

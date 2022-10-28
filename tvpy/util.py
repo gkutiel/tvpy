@@ -7,8 +7,9 @@ from tvpy.console import cls
 
 
 def load_key():
-    with open('key.txt') as f:
-        return f.read().strip()
+    return '7bfa2260d938bb3881e0dd89c47a6021'
+    # with open('key.txt', 'r') as f:
+    #     return f.read().strip()
 
 
 def folders(root):
