@@ -74,7 +74,10 @@ def tv_down(folder):
                     status.update(f'[info]Searching for {query}')
                     res = torrents.search(query)
                     items = res['items']
-                    assert items, f'No items for {query}'
+                    if not items:
+                        cls.print(f'[warn]Could not find torrent for {query}')
+                        continue
+
                     link = items[0]['link']
                     info = torrents.info(link)
 

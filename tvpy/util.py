@@ -69,8 +69,9 @@ def on_air_episodes(info):
         if e <= last_episode_to_air(info)}
 
 
-def missing_episodes(folder, tvpy):
-    return sorted(on_air_episodes(tvpy) - existing_episodes(folder))
+def missing_episodes(folder, tvpy, k=3):
+    episodes = sorted(on_air_episodes(tvpy) - existing_episodes(folder))
+    return episodes[:k]
 
 
 def done():
