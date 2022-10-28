@@ -52,7 +52,7 @@ Rename files to match the pattern `<title>.S<season>E<episode>.<ext>`
 | :exclamation:  Danger   |
 |-------------------------|
 
-To remove unused files
+Remove unused files
 ```shell
 > mkdir Carnival.Row 
 > tv-klyn Carnival.Row
