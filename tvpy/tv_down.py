@@ -26,9 +26,9 @@ def down(magnets, down_folder):
             BarColumn(),
             TaskProgressColumn(),
             TimeRemainingColumn(),
-            TextColumn('[dim cyan]Size: {task.fields[size]} MB'),
-            TextColumn('[green]Down: {task.fields[down]} kB/s'),
-            TextColumn('[blue]Up: {task.fields[up]} kB/s'),
+            TextColumn('[dim cyan]Size: {task.fields[size]}MB'),
+            TextColumn('[green]Down: {task.fields[down]}kB/s'),
+            TextColumn('[blue]Up: {task.fields[up]}kB/s'),
             TextColumn('[orange1]Peers: {task.fields[peers]}')) as progress:
 
         tasks = []
