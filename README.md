@@ -16,3 +16,6 @@ You need to get an API key from [TMDB](https://www.themoviedb.org/settings/api) 
 > mkdir Carnival.Row 
 > tvpy Carnival.Row 
 ```
+
+## Demo
+<script id="asciicast-455413" src="https://asciinema.org/a/455413.js"></script>
