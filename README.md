@@ -1,5 +1,5 @@
 # 📺 TvPy 
-Best command line tv show manager.
+Command line tv show manager.
 
 [![asciicast](https://asciinema.org/a/hQeLoj8lYcGtJvErlTWifdmfo.svg)](https://asciinema.org/a/hQeLoj8lYcGtJvErlTWifdmfo)
 
