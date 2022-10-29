@@ -31,18 +31,16 @@ def tvpy(folder):
     tv_json(folder)
 
     sep('Downloading episodes')
-    tv_down(folder)
+    if tv_down(folder):
 
-    sep('Renaming files')
-    tv_renm(folder)
+        sep('Renaming files')
+        tv_renm(folder)
 
-    sep('Downloading subtitles')
-    tv_subs(folder)
+        sep('Downloading subtitles')
+        tv_subs(folder)
 
-    sep('Removing unused files')
-    tv_klyn(folder)
+        sep('Removing unused files')
+        tv_klyn(folder)
 
-    sep('Renaming files')
-    tv_renm(folder)
-
-    cls.save_svg('demo.svg')
+        sep('Renaming files')
+        tv_renm(folder)

@@ -90,7 +90,7 @@ def tv_down(folder):
         if magnets:
             down(magnets, folder)
 
+        done()
+        return True
     except KeyboardInterrupt:
-        pass
-
-    done()
+        return False
