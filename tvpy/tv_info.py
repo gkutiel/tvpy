@@ -75,5 +75,6 @@ def tv_info(folder):
 
         cls.print(layout)
 
-    except:
+    except Exception as e:
+        print(e)
         cls.print('[red]ERROR')

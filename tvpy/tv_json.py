@@ -84,13 +84,12 @@ def tv_json(folder, force=False):
             iid = imdb_id(key, tmdb_id)
 
             res = get(key, tmdb_id)
-            res |= imdb_rating(iid)
-
+            res = {**res, **imdb_rating(iid)}
+            res['version'] = VERSION
+            res['uptodate'] = datetime.now().strftime(DATE_FORMAT)
+            res['imdb_id'] = iid
+            res['poster_base64'] = img_base64(poster)
             with open(tvpy_json, 'w') as out:
-                json.dump({
-                    'version': VERSION,
-                    'uptodate': datetime.now().strftime(DATE_FORMAT),
-                    'imdb_id': iid,
-                    'poster_base64': img_base64(poster)} | res, out)
+                json.dump(res, out)
 
     done()
