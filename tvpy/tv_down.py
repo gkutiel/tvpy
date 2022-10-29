@@ -57,13 +57,13 @@ def down(magnets, down_folder):
             sleep(1)
 
 
-def tv_down(folder):
+def tv_down(folder, k=3):
     try:
         tvpy = load_tvpy(folder)
 
         magnets = []
         with rich.status.Status('', console=cls) as status:
-            for s, e in missing_episodes(folder, tvpy):
+            for s, e in missing_episodes(folder, tvpy, k=k):
                 name = file_name(tvpy, s, e)
                 magnet = Path(folder) / f'{name}.magnet'
                 if magnet.exists():
