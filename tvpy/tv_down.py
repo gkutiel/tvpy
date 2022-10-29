@@ -57,7 +57,7 @@ def down(magnets, down_folder):
             sleep(1)
 
 
-def tv_down(folder, k=3):
+def tv_down(folder, k):
     try:
         tvpy = load_tvpy(folder)
 
@@ -91,6 +91,5 @@ def tv_down(folder, k=3):
             down(magnets, folder)
 
         done()
-        return True
     except KeyboardInterrupt:
-        return False
+        pass

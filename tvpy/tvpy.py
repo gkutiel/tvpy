@@ -20,7 +20,7 @@ logo = (r'''
 ''')
 
 
-def tvpy(folder, k=3):
+def tvpy(folder, k=10):
     def sep(title):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
@@ -31,16 +31,16 @@ def tvpy(folder, k=3):
     tv_json(folder)
 
     sep('Downloading episodes')
-    if tv_down(folder, k=k):
+    tv_down(folder, k=k)
 
-        sep('Renaming files')
-        tv_renm(folder)
+    sep('Renaming files')
+    tv_renm(folder)
 
-        sep('Downloading subtitles')
-        tv_subs(folder)
+    sep('Downloading subtitles')
+    tv_subs(folder)
 
-        sep('Removing unused files')
-        tv_klyn(folder)
+    sep('Removing unused files')
+    tv_klyn(folder)
 
-        sep('Renaming files')
-        tv_renm(folder)
+    sep('Renaming files')
+    tv_renm(folder)
