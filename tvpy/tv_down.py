@@ -37,7 +37,7 @@ def down(magnets, down_folder):
         tasks: List[Tuple[Handler, TaskID]] = []
         for name, link in magnets:
             params = lt.parse_magnet_uri(link)
-            params.save_path = down_folder
+            params.save_path = str(down_folder)
 
             h = s.add_torrent(params)
             task = progress.add_task(f'[green]{name}', total=1, size='', down='', up='', peers='')

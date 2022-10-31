@@ -1,6 +1,7 @@
 from itertools import chain
 from pathlib import Path
 
+import toml
 from PTN import parse
 
 from tvpy.console import cls

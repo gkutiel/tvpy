@@ -1,6 +1,16 @@
 from fire import Fire
 
 
+def tv_cnfg():
+    from tvpy.tv_cnfg import tv_cnfg
+    Fire(tv_cnfg)
+
+
+def tv_folo():
+    from tvpy.tv_cnfg import tv_folo
+    Fire(tv_folo)
+
+
 def tv_json():
     from tvpy.tv_json import tv_json
     Fire(tv_json)

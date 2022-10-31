@@ -2,6 +2,8 @@
     "python.linting.enabled": false,
     "cSpell.words": [
         "climage",
+        "cnfg",
+        "folo",
         "getbasic",
         "imdb",
         "jpgbase",
