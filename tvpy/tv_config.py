@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 import toml
 from rich.pretty import pprint
@@ -9,18 +10,22 @@ class keys:
     follow = 'follow'
 
 
+def save_config(config):
+    with open(Path.home() / '.tvpy.toml', 'w') as f:
+        toml.dump(config, f)
+
+
 def load_config():
     home = Path.home()
-    config = home / '.tvpy.toml'
-    if not config.exists():
-        with open(config, 'w') as f:
-            tvpy_home = home / 'tvpy'
-            follow_txt = home / 'follow.txt'
-            toml.dump({
-                keys.TVPY_HOME: str(tvpy_home),
-                keys.follow: [str(follow_txt)]}, f)
+    tvpy_toml = home / '.tvpy.toml'
+    if not tvpy_toml.exists():
+        config = {
+            keys.TVPY_HOME: str(home / 'tvpy'),
+            keys.follow: []}
 
-    with open(config) as f:
+        save_config(config)
+
+    with open(tvpy_toml) as f:
         return toml.load(f)
 
 
@@ -36,7 +41,16 @@ def read_follow():
     return follows
 
 
-def tv_follow(follow_txt): pass
+def tv_follow(file):
+    '''follow a file
+
+    Args:
+        file: follow this file
+    '''
+    config = load_config()
+    config[keys.follow].append(file)
+
+    save_config(config)
 
 
 def tv_config():
