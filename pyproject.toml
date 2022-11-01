@@ -23,8 +23,6 @@ pyright = "^1.1.273"
 toml = "^0.10.2"
 1337x = "^1.2.3"
 libtorrent = "^2.0.7"
-beautifulsoup4 = "^4.11.1"
-climage = "^0.1.3"
 
 [tool.poetry.dev-dependencies]
 rope = "^1.3.0"
@@ -40,13 +38,13 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-tv-cnfg = "tvpy.main:tv_cnfg"
-tv-folo = "tvpy.main:tv_folo"
-tv-json = "tvpy.main:tv_json"
-tv-down = "tvpy.main:tv_down"
+tv-config = "tvpy.main:tv_config"
+tv-follow = "tvpy.main:tv_follow"
+tv-tmdb = "tvpy.main:tv_tmdb"
+tv-download = "tvpy.main:tv_download"
 tv-subs = "tvpy.main:tv_subs"
-tv-renm = "tvpy.main:tv_renm"
-tv-klyn = "tvpy.main:tv_klyn"
+tv-rename = "tvpy.main:tv_rename"
+tv-clean = "tvpy.main:tv_clean"
 
 tv-info = "tvpy.main:tv_info"
 tv-html = "tvpy.main:tv_html"

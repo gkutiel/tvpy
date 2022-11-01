@@ -49,13 +49,13 @@ def load_tvpy(folder, tries=1):
         return tvpy
     except:
         if tries <= 0:
-            raise FileNotFoundError(f'Can not load or download {tv_json}')
+            raise FileNotFoundError(f'Can not load or download {tv_tmdb}')
 
-        tv_json(folder)
+        tv_tmdb(folder)
         return load_tvpy(folder, tries - 1)
 
 
-def tv_json(folder, force=False):
+def tv_tmdb(folder, force=False):
     folder = Path(folder)
     folder.mkdir(exist_ok=True)
 

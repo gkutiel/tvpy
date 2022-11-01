@@ -1,24 +1,24 @@
 from fire import Fire
 
 
-def tv_cnfg():
-    from tvpy.tv_cnfg import tv_cnfg
-    Fire(tv_cnfg)
+def tv_config():
+    from tvpy.tv_config import tv_config
+    Fire(tv_config)
 
 
-def tv_folo():
-    from tvpy.tv_cnfg import tv_folo
-    Fire(tv_folo)
+def tv_follow():
+    from tvpy.tv_config import tv_follow
+    Fire(tv_follow)
 
 
-def tv_json():
-    from tvpy.tv_json import tv_json
-    Fire(tv_json)
+def tv_tmdb():
+    from tvpy.tv_tmdb import tv_tmdb
+    Fire(tv_tmdb)
 
 
-def tv_down():
-    from tvpy.tv_down import tv_down
-    Fire(tv_down)
+def tv_download():
+    from tvpy.tv_download import tv_download
+    Fire(tv_download)
 
 
 def tv_subs():
@@ -26,14 +26,14 @@ def tv_subs():
     Fire(tv_subs)
 
 
-def tv_renm():
-    from tvpy.tv_renm import tv_renm
-    Fire(tv_renm)
+def tv_rename():
+    from tvpy.tv_rename import tv_rename
+    Fire(tv_rename)
 
 
-def tv_klyn():
-    from tvpy.tv_klyn import tv_klyn
-    Fire(tv_klyn)
+def tv_clean():
+    from tvpy.tv_clean import tv_clean
+    Fire(tv_clean)
 
 
 def tv_info():

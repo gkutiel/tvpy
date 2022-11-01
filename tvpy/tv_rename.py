@@ -5,7 +5,7 @@ from pathlib import Path
 import PTN
 
 from tvpy.console import cls
-from tvpy.tv_json import load_tvpy
+from tvpy.tv_tmdb import load_tvpy
 from tvpy.util import done, files_r
 
 
@@ -17,7 +17,7 @@ def file_name(tvpy, s, e):
     return f'{title}.S{s:02}E{e:02}'
 
 
-def tv_renm(folder):
+def tv_rename(folder):
     folder = Path(folder)
     tvpy = load_tvpy(folder)
     for file in files_r(folder):

@@ -1,11 +1,11 @@
 from tvpy.console import cls
-from tvpy.tv_cnfg import read_follow_txt, tv_folo
-from tvpy.tv_down import tv_down
+from tvpy.tv_clean import tv_clean
+from tvpy.tv_config import read_follow_txt, tv_follow
+from tvpy.tv_download import tv_download
 from tvpy.tv_info import tv_info
-from tvpy.tv_json import tv_json
-from tvpy.tv_klyn import tv_klyn
-from tvpy.tv_renm import tv_renm
+from tvpy.tv_rename import tv_rename
 from tvpy.tv_subs import tv_subs
+from tvpy.tv_tmdb import tv_tmdb
 
 logo = (r'''
 [yellow2]      ___           ___           ___           ___     
@@ -32,26 +32,26 @@ def tvpy(folder=None, k=10):
     if folder is None:
         folders = read_follow_txt()
     else:
-        tv_folo(folder)
+        tv_follow(folder)
         folders = [folder]
 
     for folder in folders:
         sep('Generating .tvpy.json')
-        tv_json(folder)
+        tv_tmdb(folder)
 
         sep('Downloading episodes')
-        tv_down(folder, k=k)
+        tv_download(folder, k=k)
 
         sep('Renaming files')
-        tv_renm(folder)
+        tv_rename(folder)
 
         sep('Downloading subtitles')
         tv_subs(folder)
 
         sep('Removing unused files')
-        tv_klyn(folder)
+        tv_clean(folder)
 
         sep('Renaming files')
-        tv_renm(folder)
+        tv_rename(folder)
 
         tv_info(folder)

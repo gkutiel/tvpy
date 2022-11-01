@@ -37,7 +37,7 @@ def can_remove(p: Path):
     return info['filetype'] not in keep_types
 
 
-def tv_klyn(folder):
+def tv_clean(folder):
     folder = Path(folder)
     for f in folder.iterdir():
         if can_remove(f):

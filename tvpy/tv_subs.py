@@ -6,7 +6,7 @@ from PTN import parse
 from rich.status import Status
 
 from tvpy.console import cls
-from tvpy.tv_json import load_tvpy
+from tvpy.tv_tmdb import load_tvpy
 from tvpy.util import done, existing_episodes, files_subs
 
 

@@ -1,6 +1,6 @@
 from importlib import resources
 
-from tvpy.tv_json import load_tvpy
+from tvpy.tv_tmdb import load_tvpy
 
 
 def tv_html(folder, out_html='index.html'):

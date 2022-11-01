@@ -10,8 +10,8 @@ from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
 from tvpy.console import cls
 from tvpy.lt import Handler
 from tvpy.torrent import torrents
-from tvpy.tv_json import load_tvpy
-from tvpy.tv_renm import file_name
+from tvpy.tv_rename import file_name
+from tvpy.tv_tmdb import load_tvpy
 from tvpy.util import done, missing_episodes
 
 
@@ -57,7 +57,7 @@ def down(magnets, down_folder):
             sleep(1)
 
 
-def tv_down(folder, k):
+def tv_download(folder, k):
     try:
         tvpy = load_tvpy(folder)
 
