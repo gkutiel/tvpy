@@ -28,10 +28,14 @@ def read_follow_txt():
         return [tvpy_home / folder for folder in f.read().splitlines()]
 
 
-def tv_folo(folder):
-    config = load_config()
-    with open(config['follow.txt'], 'a') as f:
-        print(Path(folder).name, file=f)
+def tv_folo(folder=None):
+    if folder is None:
+        follow = read_follow_txt()
+        print(*follow, sep='\n')
+    else:
+        config = load_config()
+        with open(config['follow.txt'], 'a') as f:
+            print(Path(folder).name, file=f)
 
 
 def tv_cnfg():
