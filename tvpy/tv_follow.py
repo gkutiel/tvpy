@@ -38,7 +38,7 @@ def read_follow():
         with open(follow_txt, 'r') as f:
             follows |= set(f.read().splitlines())
 
-    return follows
+    return [tvpy_home / f for f in follows]
 
 
 def tv_follow(file):
@@ -48,11 +48,5 @@ def tv_follow(file):
         file: follow this file
     '''
     config = load_config()
-    config[keys.follow].append(file)
-
+    config[keys.follow] = list(set(config[keys.follow] + [file]))
     save_config(config)
-
-
-def tv_config():
-    config = load_config()
-    pprint(config)

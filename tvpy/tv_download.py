@@ -2,13 +2,13 @@ from pathlib import Path
 from time import sleep
 from typing import List, Tuple
 
-import libtorrent as lt
+# import libtorrent as lt
 import rich.status
 from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
                            TextColumn, TimeRemainingColumn)
 
 from tvpy.console import cls
-from tvpy.lt import Handler
+from tvpy.lt import Handler, lt
 from tvpy.torrent import torrents
 from tvpy.tv_rename import file_name
 from tvpy.tv_tmdb import load_tvpy

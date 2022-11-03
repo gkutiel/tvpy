@@ -38,15 +38,14 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-tv-config = "tvpy.main:tv_config"
-tv-follow = "tvpy.main:tv_follow"
 tv-tmdb = "tvpy.main:tv_tmdb"
+tv-info = "tvpy.main:tv_info"
 tv-download = "tvpy.main:tv_download"
 tv-subs = "tvpy.main:tv_subs"
 tv-rename = "tvpy.main:tv_rename"
 tv-clean = "tvpy.main:tv_clean"
 
-tv-info = "tvpy.main:tv_info"
-tv-html = "tvpy.main:tv_html"
+# tv-html = "tvpy.main:tv_html"
 
+tv-follow = "tvpy.main:tv_follow"
 tvpy = "tvpy.main:tvpy"

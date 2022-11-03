@@ -1,13 +1,8 @@
 from fire import Fire
 
 
-def tv_config():
-    from tvpy.tv_config import tv_config
-    Fire(tv_config)
-
-
 def tv_follow():
-    from tvpy.tv_config import tv_follow
+    from tvpy.tv_follow import tv_follow
     Fire(tv_follow)
 
 
