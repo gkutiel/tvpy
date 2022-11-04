@@ -61,7 +61,7 @@ Here is an example:
 ```shell
 > echo "\
       The.Peripheral
-      Westworld" > SciFi.txt
+      Andor" > SciFi.txt
 > tv-follow SciFi.txt
 > tvpy
 ```
