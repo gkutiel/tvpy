@@ -54,7 +54,7 @@ Remove unused files
 > tv-clean The.Peripheral
 ```
 
-## Following
+## Follow
 TvPy allows you to follow lists of tv shows.
 A list is a simple text file where each row contains a name of a tv show.
 Here is an example:
