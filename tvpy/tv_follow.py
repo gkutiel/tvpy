@@ -47,6 +47,7 @@ def tv_follow(file):
     Args:
         file: follow this file
     '''
+    path = str(Path(file).absolute())
     config = load_config()
-    config[keys.follow] = list(set(config[keys.follow] + [Path(file).absolute()]))
+    config[keys.follow] = list(set(config[keys.follow] + [path]))
     save_config(config)
