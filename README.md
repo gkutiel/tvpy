@@ -2,7 +2,7 @@
 
 Manage TV show from the terminal.
 
-![demo](demo.gif)
+![demo](https://github.com/gkutiel/tvpy/blob/master/demo.gif)
 
 ## Installation
 ```shell
