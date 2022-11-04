@@ -46,7 +46,7 @@ def files_subs_r(root):
 
 def existing_episodes(folder):
     res = [parse(f.name) for f in files_media(folder)]
-    return {(e['season'], e['episode']) for e in res}
+    return {(e['season'], e['episode']) for e in res if 'season' in e}
 
 
 def all_episodes(info):
