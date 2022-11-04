@@ -1,7 +1,8 @@
 # 📺📺 TvPy 🥧🥧
 
-Command line tv show manager.
+Manage TV show from the terminal.
 
+![demo](demo.gif)
 
 ## Installation
 ```shell
