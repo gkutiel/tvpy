@@ -1,32 +1,7 @@
 from pathlib import Path
-from typing import Union
-
-import toml
-from rich.pretty import pprint
 
 
-class keys:
-    TVPY_HOME = 'TVPY_HOME'
-    follow = 'follow'
-
-
-def save_config(config):
-    with open(Path.home() / '.tvpy.toml', 'w') as f:
-        toml.dump(config, f)
-
-
-def load_config():
-    home = Path.home()
-    tvpy_toml = home / '.tvpy.toml'
-    if not tvpy_toml.exists():
-        config = {
-            keys.TVPY_HOME: str(home / 'tvpy'),
-            keys.follow: []}
-
-        save_config(config)
-
-    with open(tvpy_toml) as f:
-        return toml.load(f)
+from tvpy.config import keys, load_config, save_config
 
 
 def read_follow():

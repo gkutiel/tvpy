@@ -1,6 +1,4 @@
 from pathlib import Path
-from pprint import pprint
-from typing import List, Tuple
 
 import requests
 from lxml import etree, html
@@ -41,11 +39,3 @@ def download(*, name, season, lang, episodes, out_folder):
                 out.write(srt)
 
             episodes.remove(e)
-
-
-download(
-    name='game of thrones',
-    season=3,
-    episodes=[1, 2, 3],
-    lang='English',
-    out_folder='tmp')

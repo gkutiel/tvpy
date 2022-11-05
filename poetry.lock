@@ -496,6 +496,14 @@ doc = ["sphinx-rtd-theme (>=1.0.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sph
 dev = ["build (>=0.7.0)", "pytest-timeout (>=2.1.0)", "pytest (>=7.0.1)"]
 
 [[package]]
+name = "simple-term-menu"
+version = "1.5.2"
+description = "A Python package which creates simple interactive menus on the command line."
+category = "main"
+optional = false
+python-versions = "~=3.5"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -613,7 +621,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "924e589d87dc5cf4494dbb321c4a707da808a348609765505877974ad469d609"
+content-hash = "52bb304eddd520917c5e809da83af7c9e40c6ccc9ba77bf580a8e027ec697f7d"
 
 [metadata.files]
 1337x = []
@@ -678,6 +686,7 @@ requests = []
 requests-cache = []
 rich = []
 rope = []
+simple-term-menu = []
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
