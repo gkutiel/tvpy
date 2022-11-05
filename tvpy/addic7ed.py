@@ -1,9 +1,9 @@
-from pathlib import Path
+from collections import defaultdict
 
 import requests
 from lxml import etree, html
-from tqdm import tqdm
 
+from tvpy.config import LANGS
 from tvpy.subs import SubProvider
 
 HEADERS = {
@@ -27,12 +27,29 @@ def subs(show_id, season):
         yield int(season), int(episode), lang, link
 
 
+def filter_subs(*, subs, lang, episodes):
+    episodes = set(episodes)
+    for s, e, l, link in subs:
+        if (s, e) in episodes and l.lower() == lang.lower():
+            episodes.remove((s, e))
+            yield s, e, link
+
+
 class Addic7ed(SubProvider):
-    def get_subs(self, *, imdb_id=None, query=None, lang=..., season=..., episodes=...):
-        episodes = set(episodes)
+    def get_subs(self, *, imdb_id=None, query=None, lang=..., episodes=...):
+        assert lang in LANGS
+
         id = show_id(query)
-        for s, e, l, link in subs(id, season):
-            if e in episodes and l.lower() == lang.lower():
+        se = defaultdict(set)
+        for s, e in episodes:
+            se[s].add(e)
+
+        for season in se.keys():
+            for s, e, link in filter_subs(
+                    subs=subs(id, season),
+                    lang=lang,
+                    episodes=episodes):
+
                 yield s, e, requests.get(
                     f'https://www.addic7ed.com{link}',
-                    headers=HEADERS).text
+                    headers=HEADERS).content

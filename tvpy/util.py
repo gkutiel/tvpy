@@ -1,3 +1,4 @@
+import re
 from itertools import chain
 from pathlib import Path
 
@@ -10,6 +11,17 @@ def load_key():
     return '7bfa2260d938bb3881e0dd89c47a6021'
     # with open('key.txt', 'r') as f:
     #     return f.read().strip()
+
+
+def title2name(title, s, e):
+    title = re.sub(r'[^a-zA-Z0-9]', ' ', title)
+    title = re.sub(r' +', '.', title)
+
+    return f'{title}.S{s:02}E{e:02}'
+
+
+def name2title(name):
+    return Path(name).stem.replace('.', ' ').replace('_', ' ')
 
 
 def folders(root):

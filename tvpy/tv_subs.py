@@ -1,12 +1,14 @@
-import zipfile
 from pathlib import Path
 
 from PTN import parse
 from rich.status import Status
 
+from tvpy.addic7ed import Addic7ed
+from tvpy.config import get_lang
 from tvpy.console import cls
 from tvpy.tv_tmdb import load_tvpy
-from tvpy.util import done, existing_episodes, files_subs
+from tvpy.util import done, existing_episodes, files_subs, title2name
+from tvpy.wizdom import Wizdom
 
 
 def existing_subs(folder):
@@ -14,31 +16,28 @@ def existing_subs(folder):
     return {(e['season'], e['episode']) for e in res}
 
 
-def tv_subs(folder): pass
-# missing_subs = existing_episodes(folder) - existing_subs(folder)
-# info = load_tvpy(folder)
-# imdb_id = info['imdb_id']
-# for s, e in missing_subs:
-#     name = f'{info["name"]} S{s:02}E{e:02}'
-#     with Status(f'[info]Searching...', console=cls) as status:
-#         try:
-#             subs = list_available_subs(imdb_id, s, e)
-#             sub = select_sub(subs)
-#             sub_version = sub['version']
-#             sub_id = sub['id']
+def tv_subs(folder):
+    missing_subs = existing_episodes(folder) - existing_subs(folder)
+    if not missing_subs:
+        done()
+        return
 
-#             status.update('[info]Downloading...')
-#             zip_file = Path(folder) / f'{sub_version}.zip'
-#             down_sub(sub_id, zip_file)
+    info = load_tvpy(folder)
+    title = info['name']
+    lang = get_lang()
+    provider = Wizdom() if lang == 'Hebrew' else Addic7ed()
 
-#             status.update('[info]Extracting...')
-#             with zipfile.ZipFile(zip_file) as z:
-#                 z.extractall(folder)
+    with Status(f'[info]Downloading subtitles...', console=cls) as status:
+        srts = provider.get_subs(
+            imdb_id=info['imdb_id'],
+            query=title,
+            lang=lang,
+            episodes=missing_subs)
 
-#             status.stop()
-#             cls.print(f':clapper: [success]{name}')
-#         except:
-#             status.stop()
-#             cls.print(f'[err]Error:[/err] Could not find subtitles for {name}')
+        for s, e, srt in srts:
+            path = Path(folder) / f'{title2name(title, s, e)}.srt'
+            cls.print(f':clapper: [success]{path}')
+            with open(path, 'wb') as f:
+                f.write(srt)
 
-# done()
+    done()

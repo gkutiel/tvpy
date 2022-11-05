@@ -1,3 +1,4 @@
+from enum import Enum
 from pathlib import Path
 
 import toml
@@ -29,15 +30,15 @@ LANGS = [
     'Portuguese',
     'Romanian',
     'Russian',
-    'Spanish',
+    # 'Spanish',
     'Swedish',
     'Turkish']
 
 
-class keys:
-    lang = 'lang'
-    TVPY_HOME = 'TVPY_HOME'
-    follow = 'follow'
+class default(Enum):
+    lang = ''
+    TVPY_HOME = Path.home() / 'tvpy'
+    follow = []
 
 
 def save_config(config):
@@ -47,9 +48,17 @@ def save_config(config):
 
 def init_config():
     save_config({
-        keys.lang: '',
-        keys.TVPY_HOME: str(Path.home() / 'tvpy'),
-        keys.follow: []})
+        default.lang.name: '',
+        default.TVPY_HOME.name: str(Path.home() / 'tvpy'),
+        default.follow.name: []})
+
+
+def validate(config):
+    for key in default:
+        if key.name not in config:
+            config[key.name] = key.value
+
+    return config
 
 
 def load_config():
@@ -58,14 +67,14 @@ def load_config():
     if not tvpy_toml.exists():
         init_config()
 
-    with open(tvpy_toml) as f:
-        config = toml.load(f)
-        lang = config[keys.lang]
+    with open(tvpy_toml, 'r') as f:
+        config = validate(toml.load(f))
+        lang = config[default.lang.name]
         if lang not in LANGS:
             cls.print('[info]Please select the subtitle language:')
             i = TerminalMenu(LANGS).show()
             assert type(i) is int
-            config[keys.lang] = LANGS[i]
+            config[default.lang.name] = LANGS[i]
             save_config(config)
 
         return config
@@ -73,4 +82,4 @@ def load_config():
 
 def get_lang():
     config = load_config()
-    return config[keys.lang]
+    return config[default.lang.name]

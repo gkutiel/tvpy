@@ -1,6 +1,5 @@
 import io
 import zipfile
-from pprint import pprint
 
 import requests
 
@@ -18,10 +17,10 @@ def get_subs_json(imdb_id):
     return res['subs']
 
 
-def select_sub_ids(*, subs, season, episodes):
-    for episode in episodes:
+def select_sub_ids(*, subs, episodes):
+    for s, e in episodes:
         try:
-            yield season, episode, subs[f'{season}'][f'{episode}'][0]['id']
+            yield s, e, subs[f'{s}'][f'{e}'][0]['id']
         except:
             pass
 
@@ -42,11 +41,10 @@ def srts_from_zips(zips):
 
 
 class Wizdom(SubProvider):
-    def get_subs(self, *, imdb_id=None, query=None, lang=None, season=..., episodes=...):
-
+    def get_subs(self, *, imdb_id=None, query=None, lang=None, episodes=...):
+        assert lang == 'Hebrew'
         sub_ids = select_sub_ids(
             subs=get_subs_json(imdb_id),
-            season=season,
             episodes=episodes)
 
         zips = download_zips(sub_ids)

@@ -10,15 +10,14 @@ from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
 from tvpy.console import cls
 from tvpy.lt import Handler
 from tvpy.torrent import torrents
-from tvpy.tv_rename import file_name
 from tvpy.tv_tmdb import load_tvpy
-from tvpy.util import done, missing_episodes
+from tvpy.util import done, missing_episodes, name2title, title2name
 
 
 def q(folder, season: int, episode: int):
-    name = Path(folder).name.replace('.', ' ')
+    query = name2title(Path(folder).name)
 
-    return f'{name} S{season:02}E{episode:02}'
+    return f'{query} S{season:02}E{episode:02}'
 
 
 def down(magnets, down_folder):
@@ -64,7 +63,7 @@ def tv_download(folder, k):
         magnets = []
         with rich.status.Status('', console=cls) as status:
             for s, e in missing_episodes(folder, tvpy, k=k):
-                name = file_name(tvpy, s, e)
+                name = title2name(tvpy['name'], s, e)
                 magnet = Path(folder) / f'{name}.magnet'
                 if magnet.exists():
                     with open(magnet, 'r') as f:

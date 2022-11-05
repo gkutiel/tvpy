@@ -1,20 +1,11 @@
 
-import re
 from pathlib import Path
 
 import PTN
 
 from tvpy.console import cls
 from tvpy.tv_tmdb import load_tvpy
-from tvpy.util import done, files_r
-
-
-def file_name(tvpy, s, e):
-    title = tvpy['name']
-    title = re.sub(r'[^a-zA-Z0-9]', ' ', title)
-    title = re.sub(r' +', '.', title)
-
-    return f'{title}.S{s:02}E{e:02}'
+from tvpy.util import done, files_r, title2name
 
 
 def tv_rename(folder):
@@ -23,7 +14,7 @@ def tv_rename(folder):
     for file in files_r(folder):
         try:
             info = PTN.parse(file.name)
-            name = f'{file_name(tvpy, info["season"], info["episode"])}{file.suffix.lower()}'
+            name = f'{title2name(tvpy["name"], info["season"], info["episode"])}{file.suffix.lower()}'
             if name != file.name:
                 file.rename(folder / name)
                 cls.print(f':keyboard: [success]{name}')

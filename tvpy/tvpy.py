@@ -1,5 +1,4 @@
 from tvpy.console import cls
-from tvpy.tv_clean import tv_clean
 from tvpy.tv_download import tv_download
 from tvpy.tv_follow import read_follow
 from tvpy.tv_info import tv_info
@@ -45,9 +44,6 @@ def tvpy(folder=None, k=10):
 
         sep('Downloading subtitles')
         tv_subs(folder)
-
-        sep('Removing unused files')
-        tv_clean(folder)
 
         sep('Renaming files')
         tv_rename(folder)

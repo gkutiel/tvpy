@@ -1,15 +1,14 @@
 from pathlib import Path
 
-
-from tvpy.config import keys, load_config, save_config
+from tvpy.config import default, load_config, save_config
 
 
 def read_follow():
     config = load_config()
-    tvpy_home = Path(config[keys.TVPY_HOME])
+    tvpy_home = Path(config[default.TVPY_HOME.name])
     tvpy_home.mkdir(parents=True, exist_ok=True)
     follows = set()
-    for follow_txt in config[keys.follow]:
+    for follow_txt in config[default.follow.name]:
         with open(follow_txt, 'r') as f:
             follows |= set(f.read().splitlines())
 
@@ -24,5 +23,5 @@ def tv_follow(file):
     '''
     path = str(Path(file).absolute())
     config = load_config()
-    config[keys.follow] = list(set(config[keys.follow] + [path]))
+    config[default.follow.name] = list(set(config[default.follow.name] + [path]))
     save_config(config)

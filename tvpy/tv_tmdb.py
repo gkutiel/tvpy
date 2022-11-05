@@ -11,7 +11,7 @@ from rich.status import Status
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
 from tvpy.console import cls
 from tvpy.tmdb import get, imdb_id, imdb_rating, search
-from tvpy.util import done, load_key
+from tvpy.util import done, load_key, name2title
 
 
 def img_base64(img):
@@ -68,12 +68,12 @@ def tv_tmdb(folder, force=False):
             load_tvpy(folder)
         except:
             status.update('[info]Searching TMDB...')
-            name = folder.name.replace('.', ' ').replace('_', ' ')
-            res = search(key, name)
+            query = name2title(folder.name)
+            res = search(key, query)
 
             if res is None:
                 status.stop()
-                cls.print(f'[err]Error:[/err] Could not find info for {name}')
+                cls.print(f'[err]Error:[/err] Could not find info for {query}')
                 return
 
             tmdb_id = res['id']
