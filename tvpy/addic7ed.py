@@ -4,6 +4,12 @@ import requests
 from lxml import etree, html
 from tqdm import tqdm
 
+from tvpy.subs import SubProvider
+
+HEADERS = {
+    'referer': 'https://www.addic7ed.com/',
+    'sec-fetch-mode': 'navigate'}
+
 
 def show_id(name):
     url = f'https://www.addic7ed.com/search.php?search={name}&Submit=Search'
@@ -21,21 +27,12 @@ def subs(show_id, season):
         yield int(season), int(episode), lang, link
 
 
-def download(*, name, season, lang, episodes, out_folder):
-    episodes = set(episodes)
-    out_folder = Path(out_folder)
-    id = show_id(name)
-    for s, e, l, link in tqdm(subs(id, season)):
-        if e in episodes and l.lower() == lang.lower():
-            print(link)
-            out_srt = out_folder / f'{name}.S{s:02}E{e:02}.srt'
-            with open(out_srt, 'w') as out:
-                srt = requests.get(
+class Addic7ed(SubProvider):
+    def get_subs(self, *, imdb_id=None, query=None, lang=..., season=..., episodes=...):
+        episodes = set(episodes)
+        id = show_id(query)
+        for s, e, l, link in subs(id, season):
+            if e in episodes and l.lower() == lang.lower():
+                yield s, e, requests.get(
                     f'https://www.addic7ed.com{link}',
-                    headers={
-                        'referer': 'https://www.addic7ed.com/',
-                        'sec-fetch-mode': 'navigate'}).text
-
-                out.write(srt)
-
-            episodes.remove(e)
+                    headers=HEADERS).text

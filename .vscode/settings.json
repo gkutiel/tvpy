@@ -1,9 +1,11 @@
 {
     "python.linting.enabled": false,
     "cSpell.words": [
+        "Addic",
         "climage",
         "cnfg",
         "cssselect",
+        "epeven",
         "folo",
         "getbasic",
         "getpath",
@@ -16,10 +18,12 @@
         "referer",
         "renderable",
         "renm",
+        "srts",
         "subt",
         "TMDB",
         "tvpy",
         "tvpys",
-        "ujson"
+        "ujson",
+        "Wizdom"
     ]
 }

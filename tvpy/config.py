@@ -69,3 +69,8 @@ def load_config():
             save_config(config)
 
         return config
+
+
+def get_lang():
+    config = load_config()
+    return config[keys.lang]
