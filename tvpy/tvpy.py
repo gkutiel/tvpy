@@ -49,7 +49,4 @@ def tvpy(folder=None, k=10):
         sep('Removing unused files')
         tv_clean(folder)
 
-        sep('Renaming files')
-        tv_rename(folder)
-
         tv_info(folder)

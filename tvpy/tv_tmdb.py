@@ -88,7 +88,7 @@ def tv_tmdb(folder, force=False):
             res['version'] = VERSION
             res['uptodate'] = datetime.now().strftime(DATE_FORMAT)
             res['imdb_id'] = iid
-            res['poster_base64'] = img_base64(poster)
+            # res['poster_base64'] = img_base64(poster)
             with open(tvpy_json, 'w') as out:
                 json.dump(res, out)
 

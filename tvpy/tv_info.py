@@ -29,12 +29,17 @@ def tv_info(folder):
         for s, e in existing_episodes(folder):
             mat[s-1][e-1] = '[success]v'
 
+        def info_line(name, content):
+            return f'[bold]{name}:[/bold] {content}'
         info = Panel(
             expand=False,
             title=info["name"],
             renderable='\n'.join([
-                f'Rating: {info["rating"]}:star:',
-                f'Genres: {", ".join([g["name"] for g in info["genres"]])}']))
+                info_line('Date', info['first_air_date']),
+                info_line('Rating', f'{info["rating"]}'),
+                info_line('Genres', f'{", ".join([g["name"] for g in info["genres"]])}'),
+                info_line('Overview', info['overview'])
+            ]))
 
         episode_table = Table(
             '',
@@ -43,10 +48,10 @@ def tv_info(folder):
             title_justify='left')
 
         for i in range(len(mat[0])):
-            episode_table.add_column(f'E{i+1:02}', justify='center')
+            episode_table.add_column(f'{i+1}', justify='center')
 
         for i, row in enumerate(mat):
-            episode_table.add_row(f'S{i+1:02}', *row)
+            episode_table.add_row(f'{i+1}', *row)
 
         cls.print(info, episode_table)
 
