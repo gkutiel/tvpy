@@ -5,16 +5,6 @@ from py1337x import py1337x
 torrents = py1337x()
 
 
-def show_status(local):
-    torrent = local.status()
-    print("\r{:.2f}% complete (down: {:.1f} kB/s up: {:.1f} kB/s peers: {:d}) {}".format(
-        torrent.progress * 100,
-        torrent.download_rate / 1000,
-        torrent.upload_rate / 1000,
-        torrent.num_peers,
-        torrent.state), end=" ")
-
-
 if __name__ == '__main__':
     res = torrents.search('Andor S01E01')
     pprint(res)

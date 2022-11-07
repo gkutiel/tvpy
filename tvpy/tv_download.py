@@ -4,12 +4,12 @@ from typing import List, Tuple
 
 import libtorrent as lt
 import rich.status
+from py1337x import py1337x
 from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
                            TextColumn, TimeRemainingColumn)
 
 from tvpy.console import cls
 from tvpy.lt import Handler
-from tvpy.torrent import torrents
 from tvpy.tv_tmdb import load_tvpy
 from tvpy.util import done, missing_episodes, name2title, title2name
 
@@ -62,6 +62,7 @@ def down(magnets, down_folder, raise_ki):
 
 def tv_download(folder, k=10, raise_ki=False):
     tvpy = load_tvpy(folder)
+    torrents = py1337x()
 
     magnets = []
     with rich.status.Status('', console=cls) as status:

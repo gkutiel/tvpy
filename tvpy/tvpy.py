@@ -1,3 +1,5 @@
+import time
+
 from tvpy.console import cls
 from tvpy.tv_clean import tv_clean
 from tvpy.tv_download import tv_download
@@ -22,35 +24,40 @@ logo = (r'''
 ''')
 
 
-def tvpy(folder=None, k=10):
+def tvpy(folder=None, k=10, sleep_sec=None):
     def sep(title):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
 
     cls.print(logo)
 
-    folders = read_follow() if folder is None else [folder]
-
     try:
-        for folder in folders:
-            cls.print(f'[yellow2 bold] {folder}')
+        while True:
+            folders = read_follow() if folder is None else [folder]
+            for folder in folders:
+                cls.print(f'[yellow2 bold] {folder}')
 
-            sep('Generating .tvpy.json')
-            tv_tmdb(folder)
+                sep('Generating .tvpy.json')
+                tv_tmdb(folder)
 
-            sep('Downloading episodes')
-            tv_download(folder, k=k, raise_ki=True)
+                sep('Downloading episodes')
+                tv_download(folder, k=k, raise_ki=True)
 
-            sep('Renaming files')
-            tv_rename(folder)
+                sep('Renaming files')
+                tv_rename(folder)
 
-            sep('Downloading subtitles')
-            tv_subs(folder)
+                sep('Downloading subtitles')
+                tv_subs(folder)
 
-            sep('Removing unused files')
-            tv_clean(folder)
+                sep('Removing unused files')
+                tv_clean(folder)
 
-            tv_info(folder)
+                tv_info(folder)
+
+            if sleep_sec is None:
+                break
+
+            time.sleep(sleep_sec)
     except KeyboardInterrupt:
         cls.print('[warn]Abort')
         pass
