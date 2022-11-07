@@ -34,7 +34,7 @@ Download a tv show:
 > tv-download The.Peripheral
 ```
 
-Download (Hebrew) subtitles for a tv show:
+Download subtitles for a tv show:
 ```shell
 > mkdir The.Peripheral 
 > tv-subs The.Peripheral
