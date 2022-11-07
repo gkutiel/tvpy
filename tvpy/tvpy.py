@@ -31,22 +31,26 @@ def tvpy(folder=None, k=10):
 
     folders = read_follow() if folder is None else [folder]
 
-    for folder in folders:
-        cls.print(f'[yellow2 bold] {folder}')
+    try:
+        for folder in folders:
+            cls.print(f'[yellow2 bold] {folder}')
 
-        sep('Generating .tvpy.json')
-        tv_tmdb(folder)
+            sep('Generating .tvpy.json')
+            tv_tmdb(folder)
 
-        sep('Downloading episodes')
-        tv_download(folder, k=k)
+            sep('Downloading episodes')
+            tv_download(folder, k=k, raise_ki=True)
 
-        sep('Renaming files')
-        tv_rename(folder)
+            sep('Renaming files')
+            tv_rename(folder)
 
-        sep('Downloading subtitles')
-        tv_subs(folder)
+            sep('Downloading subtitles')
+            tv_subs(folder)
 
-        sep('Removing unused files')
-        tv_clean(folder)
+            sep('Removing unused files')
+            tv_clean(folder)
 
-        tv_info(folder)
+            tv_info(folder)
+    except KeyboardInterrupt:
+        cls.print('[warn]Abort')
+        pass
