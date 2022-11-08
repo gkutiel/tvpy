@@ -29,7 +29,7 @@ def title2name(title, s, e):
 
 
 def name2title(name):
-    return Path(name).stem.replace('.', ' ').replace('_', ' ')
+    return Path(name).name.replace('.', ' ').replace('_', ' ')
 
 
 def folders(root):

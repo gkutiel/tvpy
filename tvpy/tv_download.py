@@ -57,7 +57,6 @@ def down(magnets, down_folder, raise_ki):
 
                 sleep(1)
     except KeyboardInterrupt:
-        print(dir(s))
         if raise_ki:
             raise KeyboardInterrupt()
 
