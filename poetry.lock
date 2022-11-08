@@ -196,6 +196,17 @@ six = "*"
 termcolor = "*"
 
 [[package]]
+name = "humanize"
+version = "4.4.0"
+description = "Python humanize utilities"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+tests = ["freezegun", "pytest", "pytest-cov"]
+
+[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -621,7 +632,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "52bb304eddd520917c5e809da83af7c9e40c6ccc9ba77bf580a8e027ec697f7d"
+content-hash = "f29e7cf105b748876a1b16b8b9545739d5645a87e432872d5a4e94753d4450c3"
 
 [metadata.files]
 1337x = []
@@ -646,6 +657,7 @@ exceptiongroup = []
 fire = [
     {file = "fire-0.4.0.tar.gz", hash = "sha256:c5e2b8763699d1142393a46d0e3e790c5eb2f0706082df8f647878842c216a62"},
 ]
+humanize = []
 idna = []
 importlib-metadata = []
 iniconfig = [

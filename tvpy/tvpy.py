@@ -1,5 +1,7 @@
 import time
 
+from humanize import naturaldelta, naturaltime
+
 from tvpy.console import cls
 from tvpy.tv_clean import tv_clean
 from tvpy.tv_download import tv_download
@@ -24,7 +26,7 @@ logo = (r'''
 ''')
 
 
-def tvpy(folder=None, k=10, sleep_sec=None):
+def tvpy(folder=None, k=1, sleep_sec=3_600):
     def sep(title):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
@@ -35,7 +37,7 @@ def tvpy(folder=None, k=10, sleep_sec=None):
         while True:
             folders = read_follow() if folder is None else [folder]
             for folder in folders:
-                cls.print(f'[yellow2 bold] {folder}')
+                cls.print(f'[yellow2 bold]{folder}')
 
                 sep('Generating .tvpy.json')
                 tv_tmdb(folder)
@@ -57,7 +59,8 @@ def tvpy(folder=None, k=10, sleep_sec=None):
             if sleep_sec is None:
                 break
 
+            cls.print(f'[info]💤 Sleeping for {naturaldelta(sleep_sec)} 💤. (press CTRL+C to abort)')
             time.sleep(sleep_sec)
     except KeyboardInterrupt:
-        cls.print('[warn]Abort')
+        cls.print('[warn]Aborted')
         pass
