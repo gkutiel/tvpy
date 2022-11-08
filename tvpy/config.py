@@ -37,6 +37,7 @@ LANGS = [
 
 class default(Enum):
     lang = ''
+    max_file_size = '1 GB'
     TVPY_HOME = Path.home() / 'tvpy'
     follow = []
 

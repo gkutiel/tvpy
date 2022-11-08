@@ -8,10 +8,12 @@ from py1337x import py1337x
 from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
                            TextColumn, TimeRemainingColumn)
 
+from tvpy.config import default, load_config
 from tvpy.console import cls
 from tvpy.lt import Handler
 from tvpy.tv_tmdb import load_tvpy
-from tvpy.util import done, missing_episodes, name2title, title2name
+from tvpy.util import (done, file_size_in_mb, missing_episodes, name2title,
+                       title2name)
 
 
 def q(folder, season: int, episode: int):
@@ -77,6 +79,12 @@ def tv_download(folder, k=10, raise_ki=False):
                 status.update(f'[info]Searching for {query}')
                 res = torrents.search(query)
                 items = res['items']
+                config = load_config()
+                max_size = file_size_in_mb(config[default.max_file_size.name])
+                items = [
+                    item for item in items
+                    if file_size_in_mb(item['size']) <= max_size]
+
                 if not items:
                     cls.print(f'[warn]Could not find torrent for {query}')
                     continue
