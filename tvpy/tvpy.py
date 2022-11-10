@@ -26,7 +26,7 @@ logo = (r'''
 ''')
 
 
-def tvpy(folder=None, k=3, sleep_sec=3_600):
+def tvpy(folder=None, k=3, sleep_sec=600):
     def sep(title):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
