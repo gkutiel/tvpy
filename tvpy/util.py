@@ -21,11 +21,18 @@ def load_key():
     #     return f.read().strip()
 
 
-def title2name(title, s, e):
-    title = re.sub(r'[^a-zA-Z0-9]', ' ', title)
-    title = re.sub(r' +', '.', title)
+def title2file_name(title, s, e):
+    name = re.sub(r'[^a-zA-Z0-9]', ' ', title)
+    name = re.sub(r' +', '.', name)
 
-    return f'{title}.S{s:02}E{e:02}'
+    return f'{name}.S{s:02}E{e:02}'
+
+
+def title2folder_name(title):
+    name = re.sub(r'[^a-zA-Z0-9]', ' ', title)
+    name = re.sub(r' +', '.', name)
+
+    return name
 
 
 def name2title(name):

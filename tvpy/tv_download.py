@@ -13,7 +13,7 @@ from tvpy.console import cls
 from tvpy.lt import Handler
 from tvpy.tv_tmdb import load_tvpy
 from tvpy.util import (done, file_size_in_mb, missing_episodes, name2title,
-                       title2name)
+                       title2file_name)
 
 
 def q(folder, season: int, episode: int):
@@ -68,7 +68,7 @@ def tv_download(folder, k=10, raise_ki=False):
     magnets = []
     with rich.status.Status('', console=cls) as status:
         for s, e in missing_episodes(folder, tvpy, k=k):
-            name = title2name(tvpy['name'], s, e)
+            name = title2file_name(tvpy['name'], s, e)
             magnet = Path(folder) / f'{name}.magnet'
             if magnet.exists():
                 with open(magnet, 'r') as f:

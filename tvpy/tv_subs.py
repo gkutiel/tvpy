@@ -7,7 +7,7 @@ from tvpy.addic7ed import Addic7ed
 from tvpy.config import get_lang
 from tvpy.console import cls
 from tvpy.tv_tmdb import load_tvpy
-from tvpy.util import done, existing_episodes, files_subs, title2name
+from tvpy.util import done, existing_episodes, files_subs, title2file_name
 from tvpy.wizdom import Wizdom
 
 
@@ -35,7 +35,7 @@ def tv_subs(folder):
             episodes=missing_subs)
 
         for s, e, srt in srts:
-            path = Path(folder) / f'{title2name(title, s, e)}.srt'
+            path = Path(folder) / f'{title2file_name(title, s, e)}.srt'
             cls.print(f':clapper: [success]{path}')
             with open(path, 'wb') as f:
                 f.write(srt)

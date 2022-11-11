@@ -13,7 +13,7 @@ def test_wizdom():
         episodes=episodes)
 
     sub_ids = list(sub_ids)
-    assert sub_ids == [(1, 1, 252486), (2, 3, 300385)]
+    assert sorted(sub_ids) == [(1, 1, 252486), (2, 3, 300385)]
 
     zips = download_zips(sub_ids)
     srts = srts_from_zips(zips)

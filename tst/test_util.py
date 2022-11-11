@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from tvpy.util import file_size_in_mb, name2title, title2name
+from tvpy.util import (file_size_in_mb, name2title, title2file_name,
+                       title2folder_name)
 
 
 def test_file_size_in_mb():
@@ -18,4 +19,5 @@ def test_name2title():
 
 
 def test_title2name():
-    assert title2name('The Peripheral', 1, 2) == 'The.Peripheral.S01E02'
+    assert title2file_name('The Peripheral', 1, 2) == 'The.Peripheral.S01E02'
+    assert title2folder_name('The Peripheral') == 'The.Peripheral'

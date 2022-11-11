@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from tvpy.config import default, load_config, save_config
+from tvpy.util import title2folder_name
 
 
 def read_follow():
@@ -12,7 +13,7 @@ def read_follow():
         with open(follow_txt, 'r') as f:
             follows |= set(f.read().splitlines())
 
-    return {tvpy_home / f for f in follows}
+    return {tvpy_home / title2folder_name(f) for f in follows}
 
 
 def tv_follow(file):
