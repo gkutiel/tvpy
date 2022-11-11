@@ -78,15 +78,19 @@ def tv_download(folder, k=10, raise_ki=False):
                 status.update(f'[info]Searching for {query}')
                 res = torrents.search(query)
                 items = res['items']
-                config = load_config()
-                max_size = file_size_in_mb(config[default.max_file_size.name])
-                items = [
-                    item for item in items
-                    if file_size_in_mb(item['size']) <= max_size]
 
                 if not items:
                     cls.print(f'[warn]Could not find torrent for {query}')
                     continue
+
+                for item in items:
+                    mb = file_size_in_mb(item['size'])
+                    item['seed_per_mb'] = int(item['seeders']) / mb
+
+                items = sorted(
+                    items,
+                    key=lambda item: item['seed_per_mb'],
+                    reverse=True)
 
                 link = items[0]['link']
                 info = torrents.info(link)

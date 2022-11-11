@@ -44,3 +44,13 @@ def tv_html():
 def tvpy():
     from tvpy.tvpy import tvpy
     Fire(tvpy)
+
+
+if __name__ == '__main__':
+    import json
+
+    from py1337x import py1337x
+
+    with open('tmp.json', 'w') as f:
+
+        json.dump(py1337x().search('Andor'), f)
