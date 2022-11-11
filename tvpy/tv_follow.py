@@ -13,7 +13,7 @@ def read_follow():
         with open(follow_txt, 'r') as f:
             follows |= set(f.read().splitlines())
 
-    return {tvpy_home / title2folder_name(f) for f in follows}
+    return {tvpy_home / title2folder_name(f) for f in follows if f}
 
 
 def tv_follow(file):

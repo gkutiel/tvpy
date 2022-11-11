@@ -39,6 +39,8 @@ def tvpy(folder=None, k=3, sleep_sec=None):
     try:
         while True:
             folders = read_follow() if folder is None else [folder]
+            print(*folders, sep='\n')
+            return
             for folder in folders:
                 cls.print(f'[yellow2 bold]{folder}')
 
