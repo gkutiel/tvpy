@@ -13,7 +13,6 @@ from tvpy.util import all_episodes, existing_episodes, last_episode_to_air
 def tv_info(folder):
     try:
         info = load_tvpy(folder)
-        poster = Path(folder) / '.poster.jpg'
 
         episodes = all_episodes(info)
         ss, es = zip(*episodes)
@@ -26,6 +25,8 @@ def tv_info(folder):
         for s, e in episodes:
             mat[s-1][e-1] = '[err]x' if (s, e) <= last_e else ':hourglass:'
 
+        existing = existing_episodes(folder)
+        assert not (existing - set(episodes)), f'Unexpected episodes found existing - set(episodes)'
         for s, e in existing_episodes(folder):
             mat[s-1][e-1] = '[success]v'
 
@@ -56,5 +57,4 @@ def tv_info(folder):
         cls.print(info, episode_table)
 
     except Exception as e:
-        print(e)
-        cls.print('[red]ERROR')
+        cls.print(f'[err]ERROR:[/err] {e}')
