@@ -22,7 +22,8 @@ def load_key():
 
 
 def title2file_name(title, s, e):
-    name = re.sub(r'[^a-zA-Z0-9]', ' ', title)
+    name = re.sub(r"[']", '', title)
+    name = re.sub(r'[^a-zA-Z0-9]', ' ', name)
     name = re.sub(r' +', '.', name)
 
     return f'{name}.S{s:02}E{e:02}'
