@@ -7,12 +7,12 @@ from PTN import parse
 from tvpy.console import cls
 
 
-def file_size_in_mb(size: str):
+def file_size_in_mb(size_str: str):
     # e.g 1.8 GB, 222.8 MB
-    size_mb, units = size.split(' ')
+    size, units = size_str.split(' ')
     assert units in {'GB', 'MB'}
-    size_mb = float(size_mb)
-    return size_mb if units == 'MB' else size_mb * 2**10
+    size = float(size)
+    return size if units == 'MB' else size * 2**10
 
 
 def load_key():
