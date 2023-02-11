@@ -6,6 +6,7 @@ from pathlib import Path
 
 import requests
 from PIL import Image
+from rich.pretty import pprint
 from rich.status import Status
 
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
@@ -70,6 +71,7 @@ def tv_tmdb(folder, force=False):
             status.update('[info]Searching TMDB...')
             query = name2title(folder.name)
             res = search(key, query)
+            pprint(res)
 
             if res is None:
                 status.stop()

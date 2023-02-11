@@ -16,9 +16,12 @@ def file_size_in_mb(size_str: str):
 
 
 def load_key():
+    key_txt = Path('key.txt')
+    if key_txt.exists():
+        with open(key_txt, 'r') as f:
+            return f.read().strip()
+
     return '7bfa2260d938bb3881e0dd89c47a6021'
-    # with open('key.txt', 'r') as f:
-    #     return f.read().strip()
 
 
 def title2file_name(title, s, e):

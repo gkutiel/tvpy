@@ -1,7 +1,3 @@
-
-
-from pathlib import Path
-
 from rich.panel import Panel
 from rich.table import Table
 

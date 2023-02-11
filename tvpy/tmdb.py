@@ -1,7 +1,9 @@
 import json
 import re
+import urllib.parse
 
 import requests
+from rich.pretty import pprint
 
 
 def imdb_id(key, id):
@@ -22,8 +24,11 @@ def imdb_rating(id):
 
 def search(key, q):
     try:
-        url = f'https://api.themoviedb.org/3/search/tv/?api_key={key}&query={q}'
+        q = urllib.parse.quote_plus(q)
+        url = f'https://api.themoviedb.org/3/search/tv?api_key={key}&query={q}'
+        pprint(url)
         res = requests.get(url)
+        pprint(res)
         res = res.json()
         res = res['results'][0]
 
