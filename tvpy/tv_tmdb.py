@@ -71,7 +71,6 @@ def tv_tmdb(folder, force=False):
             status.update('[info]Searching TMDB...')
             query = name2title(folder.name)
             res = search(key, query)
-            pprint(res)
 
             if res is None:
                 status.stop()
