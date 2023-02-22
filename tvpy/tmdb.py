@@ -26,9 +26,7 @@ def search(key, q):
     try:
         q = urllib.parse.quote_plus(q)
         url = f'https://api.themoviedb.org/3/search/tv?api_key={key}&query={q}'
-        pprint(url)
         res = requests.get(url)
-        pprint(res)
         res = res.json()
         res = res['results'][0]
 
