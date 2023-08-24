@@ -49,7 +49,6 @@ def tvpy_folder(folder, k):
         cls.print()
         cls.print(f'[dim orchid1]{title}')
     try:
-
         sep('Generating .tvpy.json')
         tv_tmdb(folder)
 

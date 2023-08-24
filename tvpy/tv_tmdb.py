@@ -61,7 +61,9 @@ def load_tvpy(folder, tries=1):
 
 def tv_tmdb(folder, force=False):
     folder = Path(folder)
-    folder.mkdir(exist_ok=True)
+    folder.mkdir(
+        parents=True,
+        exist_ok=True)
 
     key = load_key()
     tvpy_json = folder / '.tvpy.json'
