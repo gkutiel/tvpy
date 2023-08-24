@@ -6,12 +6,11 @@ from pathlib import Path
 
 import requests
 from PIL import Image
-from rich.pretty import pprint
 from rich.status import Status
 
 from tvpy.config import CACHE_DAYS, DATE_FORMAT, POSTER_WIDTH, VERSION
 from tvpy.console import cls
-from tvpy.tmdb import get, imdb_id, imdb_rating, search
+from tvpy.tmdb import get, imdb_id, imdb_rating, search_torrent
 from tvpy.util import done, load_key, name2title
 
 
@@ -37,6 +36,9 @@ def get_img(poster_path):
 def load_tvpy(folder, tries=1):
     try:
         folder = Path(folder)
+        folder.mkdir(
+            parents=True,
+            exist_ok=True)
 
         tvpy_json = folder / '.tvpy.json'
         with open(tvpy_json, 'r') as f:
@@ -44,7 +46,8 @@ def load_tvpy(folder, tries=1):
 
         assert tvpy['version'] == VERSION
 
-        delta = datetime.now() - datetime.strptime(tvpy['uptodate'], DATE_FORMAT)
+        delta = datetime.now() - \
+            datetime.strptime(tvpy['uptodate'], DATE_FORMAT)
         assert delta.days <= CACHE_DAYS
 
         return tvpy
@@ -70,7 +73,7 @@ def tv_tmdb(folder, force=False):
         except:
             status.update('[info]Searching TMDB...')
             query = name2title(folder.name)
-            res = search(key, query)
+            res = search_torrent(key, query)
 
             if res is None:
                 status.stop()

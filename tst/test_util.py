@@ -1,4 +1,3 @@
-from pathlib import Path
 
 from tvpy.util import (file_size_in_mb, name2title, title2file_name,
                        title2folder_name)

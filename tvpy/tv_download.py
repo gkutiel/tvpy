@@ -1,3 +1,4 @@
+from pprint import pprint
 from pathlib import Path
 from time import sleep
 from typing import List, Tuple
@@ -8,7 +9,6 @@ from py1337x import py1337x
 from rich.progress import (BarColumn, Progress, TaskID, TaskProgressColumn,
                            TextColumn, TimeRemainingColumn)
 
-from tvpy.config import default, load_config
 from tvpy.console import cls
 from tvpy.lt import Handler
 from tvpy.tv_tmdb import load_tvpy
@@ -41,7 +41,8 @@ def down(magnets, down_folder, raise_ki):
                 params.save_path = str(down_folder)
 
                 h = s.add_torrent(params)
-                task = progress.add_task(f'[green]{name}', total=1, size='', down='', up='', peers='')
+                task = progress.add_task(
+                    f'[green]{name}', total=1, size='', down='', up='', peers='')
                 tasks.append((h, task))
 
             while not progress.finished:
@@ -61,9 +62,36 @@ def down(magnets, down_folder, raise_ki):
             raise KeyboardInterrupt()
 
 
+def search_torrent(query):
+    torrents = py1337x()
+    res = torrents.search(query)
+
+    items = res['items']
+
+    if items is None:
+        return None
+
+    # for item in items:
+    #     mb = file_size_in_mb(item['size'])
+    #     item['seed_per_mb'] = int(item['seeders']) / mb
+
+    # items = sorted(
+    #     items,
+    #     key=lambda item: item['seed_per_mb'],
+    #     reverse=True)
+
+    items = sorted(
+        items,
+        key=lambda item: int(item['seeders']),
+        reverse=True)
+
+    link = items[0]['link']
+    link = link.replace('1377x', '1337x')
+    return torrents.info(link)
+
+
 def tv_download(folder, k=10, raise_ki=False):
     tvpy = load_tvpy(folder)
-    torrents = py1337x()
 
     magnets = []
     with rich.status.Status('', console=cls) as status:
@@ -76,26 +104,13 @@ def tv_download(folder, k=10, raise_ki=False):
             else:
                 query = q(folder, s, e)
                 status.update(f'[info]Searching for {query}')
-                res = torrents.search(query)
-                items = res['items']
-
-                if not items:
+                info = search_torrent(query)
+                if not info:
                     cls.print(f'[warn]Could not find torrent for {query}')
                     continue
 
-                for item in items:
-                    mb = file_size_in_mb(item['size'])
-                    item['seed_per_mb'] = int(item['seeders']) / mb
-
-                items = sorted(
-                    items,
-                    key=lambda item: item['seed_per_mb'],
-                    reverse=True)
-
-                link = items[0]['link']
-                info = torrents.info(link)
-
                 magnet_link = info['magnetLink']
+
                 with open(magnet, 'w') as f:
                     f.write(magnet_link)
 

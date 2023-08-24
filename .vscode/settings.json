@@ -2,6 +2,7 @@
     "python.linting.enabled": false,
     "cSpell.words": [
         "Addic",
+        "Ahsoka",
         "Andor",
         "climage",
         "cnfg",
@@ -26,6 +27,8 @@
         "tvpy",
         "tvpys",
         "ujson",
+        "unfollow",
+        "unfollowing",
         "Wizdom"
     ]
 }

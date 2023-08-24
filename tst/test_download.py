@@ -1,15 +1,18 @@
+from tvpy.tv_download import search_torrent
 import json
 from pprint import pprint
 
-from py1337x import py1337x
-
 
 def test_search():
-    torrents = py1337x()
-    pprint(torrents.search('Andor'))
+    info = search_torrent('Andor S01E01')
+    assert info is not None
+    link = info['magnetLink']
+    assert link[:6] == 'magnet'
 
 
-if __name__ == '__main__':
-    torrents = py1337x()
-    with open('1337.json', 'w') as f:
-        json.dump(torrents.search('Andor'), f)
+def test_search_2():
+    info = search_torrent('Ahsoka S01E01')
+    pprint(info)
+    assert info is not None
+    link = info['magnetLink']
+    assert link[:6] == 'magnet'

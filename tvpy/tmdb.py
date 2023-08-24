@@ -3,11 +3,11 @@ import re
 import urllib.parse
 
 import requests
-from rich.pretty import pprint
 
 
 def imdb_id(key, id):
-    res = requests.get(f'https://api.themoviedb.org/3/tv/{id}?api_key={key}&append_to_response=external_ids')
+    res = requests.get(
+        f'https://api.themoviedb.org/3/tv/{id}?api_key={key}&append_to_response=external_ids')
     res = res.json()
     return res['external_ids']['imdb_id']
 
@@ -22,7 +22,7 @@ def imdb_rating(id):
     return {k: resource[k] for k in ('rating', 'ratingCount')}
 
 
-def search(key, q):
+def search_torrent(key, q):
     try:
         q = urllib.parse.quote_plus(q)
         url = f'https://api.themoviedb.org/3/search/tv?api_key={key}&query={q}'

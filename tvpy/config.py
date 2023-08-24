@@ -37,7 +37,6 @@ LANGS = [
 
 class default(Enum):
     lang = ''
-    TVPY_HOME = Path.home() / 'tvpy'
     follow = []
 
 
@@ -49,7 +48,6 @@ def save_config(config):
 def init_config():
     save_config({
         default.lang.name: '',
-        default.TVPY_HOME.name: str(Path.home() / 'tvpy'),
         default.follow.name: []})
 
 
