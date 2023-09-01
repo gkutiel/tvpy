@@ -68,6 +68,7 @@ def search_torrent(query):
 
     items = res['items']
 
+    print('ITEMS')
     pprint(items)
 
     if items is None:

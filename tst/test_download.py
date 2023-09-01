@@ -1,5 +1,4 @@
 from tvpy.tv_download import search_torrent
-import json
 from pprint import pprint
 
 
