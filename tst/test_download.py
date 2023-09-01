@@ -16,3 +16,12 @@ def test_search_2():
     assert info is not None
     link = info['magnetLink']
     assert link[:6] == 'magnet'
+
+
+def test_search_3():
+    info = search_torrent('ONE PIECE S01E01')
+    pprint(info)
+    assert info is not None
+    link = info['magnetLink']
+    assert link[:6] == 'magnet'
+    assert False

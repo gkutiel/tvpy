@@ -71,15 +71,6 @@ def search_torrent(query):
     if items is None:
         return None
 
-    # for item in items:
-    #     mb = file_size_in_mb(item['size'])
-    #     item['seed_per_mb'] = int(item['seeders']) / mb
-
-    # items = sorted(
-    #     items,
-    #     key=lambda item: item['seed_per_mb'],
-    #     reverse=True)
-
     items = sorted(
         items,
         key=lambda item: int(item['seeders']),
