@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tvpy"
-version = "0.0.39"
+version = "0.0.40"
 description = "📺 TvPy"
 homepage = "https://github.com/gkutiel/tvpy/tree/master"
 repository = "https://github.com/gkutiel/tvpy/tree/master"
@@ -10,7 +10,7 @@ authors = ["Gilad Kutiel <gilad.kutiel@gmail.com>"]
 include = ['tvpy/*']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 fire = "^0.4.0"
 tqdm = "^4.64.0"
 Pillow = "^9.2.0"
