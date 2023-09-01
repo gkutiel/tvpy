@@ -39,7 +39,8 @@ def tvpy(folder=None,  k=3):
         err_msg = f'[red]Something went wrong with {folder}. Unfollowing...'
         try:
             tvpy_folder(folder, k)
-        except:
+        except Exception as e:
+            cls.print(e)
             cls.print(err_msg)
             tv_unfollow(folder)
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tvpy"
-version = "0.0.40"
+version = "0.0.41"
 description = "📺 TvPy"
 homepage = "https://github.com/gkutiel/tvpy/tree/master"
 repository = "https://github.com/gkutiel/tvpy/tree/master"
