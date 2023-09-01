@@ -63,7 +63,7 @@ def down(magnets, down_folder, raise_ki):
 
 
 def search_torrent(query):
-    torrents = py1337x()
+    torrents = py1337x(proxy='1337x.to')
     res = torrents.search(query)
 
     items = res['items']
@@ -80,7 +80,7 @@ def search_torrent(query):
         reverse=True)
 
     link = items[0]['link']
-    link = link.replace('1377x', '1337x')
+    # link = link.replace('1377x', '1337x')
     return torrents.info(link)
 
 
