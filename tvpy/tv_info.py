@@ -22,7 +22,9 @@ def tv_info(folder):
             mat[s-1][e-1] = '[err]x' if (s, e) <= last_e else ':hourglass:'
 
         existing = existing_episodes(folder)
-        assert not (existing - set(episodes)), f'Unexpected episodes found existing - set(episodes)'
+        assert not (existing - set(episodes)
+                    ), f'Unexpected episodes found {existing - set(episodes)}'
+
         for s, e in existing_episodes(folder):
             mat[s-1][e-1] = '[success]v'
 
@@ -34,7 +36,8 @@ def tv_info(folder):
             renderable='\n'.join([
                 info_line('Date', info['first_air_date']),
                 info_line('Rating', f'{info["rating"]}'),
-                info_line('Genres', f'{", ".join([g["name"] for g in info["genres"]])}'),
+                info_line(
+                    'Genres', f'{", ".join([g["name"] for g in info["genres"]])}'),
                 info_line('Overview', info['overview'])
             ]))
 
